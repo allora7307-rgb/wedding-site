@@ -1,0 +1,1054 @@
+rm style.css
+cat > style.css << 'EOF'
+/* Основные стили */
+:root {
+    --primary-blue: #a3d5ff;
+    --primary-lilac: #c8a2c8;
+    --light-blue: #e6f2ff;
+    --light-lilac: #f0e6f5;
+    --white: #ffffff;
+    --dark-gray: #333333;
+    --light-gray: #f8f9fa;
+    --medium-gray: #666666;
+    --shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.15);
+    --radius: 15px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--dark-gray);
+    background-color: var(--white);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Фоновая карта */
+.world-map-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" opacity="0.03"><path d="M100,100 Q200,50 300,100" stroke="%23a3d5ff" fill="none" stroke-width="2"/><circle cx="150" cy="150" r="10" fill="%23c8a2c8"/><circle cx="250" cy="200" r="10" fill="%23a3d5ff"/></svg>');
+    background-size: 400px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Кнопка музыки */
+.music-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--white);
+    border: 2px solid var(--primary-blue);
+    border-radius: 25px;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.music-btn:hover {
+    background: var(--primary-blue);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.music-btn i {
+    font-size: 16px;
+}
+
+/* Герой блок */
+.hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-lilac) 100%);
+    background-attachment: fixed;
+    padding: 40px 20px;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: var(--white);
+    max-width: 800px;
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
+    margin-bottom: 3rem;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+.hero-date {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: var(--radius);
+    display: inline-block;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.date-large {
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 600;
+    color: var(--white);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.time {
+    font-size: clamp(1.5rem, 2vw, 2rem);
+    color: var(--white);
+    opacity: 0.9;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--white);
+    text-align: center;
+    animation: bounce 2s infinite;
+}
+
+.scroll-indicator i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    display: block;
+    color: var(--white);
+}
+
+.scroll-indicator p {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+    40% { transform: translateY(-10px) translateX(-50%); }
+    60% { transform: translateY(-5px) translateX(-50%); }
+}
+
+/* Общие стили секций */
+section {
+    padding: 80px 0;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--dark-gray);
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, var(--primary-blue), var(--primary-lilac));
+    border-radius: 2px;
+}
+
+/* Блок истории */
+.story-section {
+    background: var(--light-gray);
+}
+
+.story-text {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    text-align: center;
+    color: var(--medium-gray);
+}
+
+.story-text p {
+    margin-bottom: 1.5rem;
+}
+
+.story-photos {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.photo-circle {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid var(--white);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.photo-circle:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-hover);
+}
+
+.photo-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Таймер */
+.countdown-section {
+    background: linear-gradient(135deg, var(--light-blue) 0%, var(--light-lilac) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.countdown-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.05"><circle cx="50" cy="50" r="40" stroke="%23c8a2c8" fill="none" stroke-width="2"/></svg>');
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 2rem auto;
+    max-width: 900px;
+}
+
+.time-unit {
+    text-align: center;
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--radius);
+    min-width: 140px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.time-unit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, var(--primary-blue), var(--primary-lilac));
+}
+
+.time-unit:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.time-unit .number {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 700;
+    display: block;
+    line-height: 1;
+    color: var(--dark-gray);
+    font-family: 'Inter', sans-serif;
+}
+
+.time-unit .label {
+    font-size: 1rem;
+    margin-top: 10px;
+    color: var(--medium-gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.countdown-note {
+    text-align: center;
+    color: var(--medium-gray);
+    font-size: 0.9rem;
+    margin-top: 2rem;
+    font-style: italic;
+}
+
+/* Дата и календарь */
+.date-section {
+    background: var(--white);
+}
+
+.date-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.date-icon {
+    font-size: 4rem;
+    color: var(--primary-lilac);
+}
+
+.date-info {
+    text-align: left;
+}
+
+.date-main {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--dark-gray);
+    margin-bottom: 5px;
+}
+
+.date-time {
+    font-size: 1.5rem;
+    color: var(--primary-blue);
+    margin-bottom: 5px;
+}
+
+.date-note {
+    color: var(--medium-gray);
+    font-size: 1rem;
+}
+
+.calendar-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-lilac));
+    color: var(--white);
+    padding: 16px 32px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+    margin: 0 auto;
+    display: block;
+    width: fit-content;
+}
+
+.calendar-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.calendar-btn i {
+    font-size: 1.2rem;
+}
+
+/* Программа дня */
+.program-section {
+    background: var(--light-gray);
+}
+
+.program-timeline {
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.program-timeline::before {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--primary-blue), var(--primary-lilac));
+    border-radius: 2px;
+}
+
+.program-item {
+    display: flex;
+    margin-bottom: 2.5rem;
+    position: relative;
+    align-items: flex-start;
+}
+
+.program-time {
+    width: 70px;
+    font-weight: 600;
+    color: var(--primary-lilac);
+    padding-right: 20px;
+    text-align: right;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.program-details {
+    flex: 1;
+    padding-left: 30px;
+    position: relative;
+    background: var(--white);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-left: 10px;
+}
+
+.program-details::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 20px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--primary-lilac);
+    border: 3px solid var(--white);
+    box-shadow: 0 0 0 3px var(--primary-blue);
+}
+
+.program-details h3 {
+    color: var(--dark-gray);
+    margin-bottom: 8px;
+    font-size: 1.3rem;
+}
+
+.program-details p {
+    color: var(--medium-gray);
+    margin: 0;
+}
+
+/* Место проведения */
+.location-section {
+    background: var(--white);
+}
+
+.location-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.location-icon {
+    font-size: 4rem;
+    color: var(--primary-blue);
+}
+
+.location-info h3 {
+    font-size: 2rem;
+    color: var(--dark-gray);
+    margin-bottom: 10px;
+}
+
+.location-info p {
+    color: var(--medium-gray);
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.location-note {
+    font-size: 0.9rem;
+    color: var(--primary-lilac);
+    font-style: italic;
+}
+
+.location-map {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--light-gray);
+    border-radius: var(--radius);
+    padding: 40px;
+    text-align: center;
+}
+
+.map-placeholder {
+    color: var(--medium-gray);
+}
+
+.map-placeholder i {
+    font-size: 4rem;
+    color: var(--primary-lilac);
+    margin-bottom: 20px;
+    display: block;
+}
+
+.map-placeholder p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.map-btn {
+    display: inline-block;
+    background: var(--white);
+    color: var(--primary-blue);
+    padding: 12px 24px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    border: 2px solid var(--primary-blue);
+    transition: var(--transition);
+}
+
+.map-btn:hover {
+    background: var(--primary-blue);
+    color: var(--white);
+}
+
+/* Дресс-код */
+.dresscode-section {
+    background: linear-gradient(135deg, var(--light-blue) 0%, var(--light-lilac) 100%);
+}
+
+.dresscode-info {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.dresscode-info p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    color: var(--medium-gray);
+}
+
+.color-palette {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.color-item {
+    text-align: center;
+}
+
+.color-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.color-circle:hover {
+    transform: scale(1.1);
+}
+
+.color-item span {
+    display: block;
+    color: var(--medium-gray);
+    font-size: 0.9rem;
+}
+
+/* Форма RSVP */
+.rsvp-section {
+    background: var(--white);
+}
+
+.rsvp-subtitle {
+    text-align: center;
+    color: var(--medium-gray);
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+}
+
+.wedding-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--light-gray);
+    padding: 40px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--dark-gray);
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    transition: var(--transition);
+    background: var(--white);
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(163, 213, 255, 0.2);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    transition: var(--transition);
+    background: var(--white);
+}
+
+.radio-option:hover {
+    border-color: var(--primary-blue);
+    background: var(--light-blue);
+}
+
+.radio-option input {
+    display: none;
+}
+
+.radio-checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    margin-right: 12px;
+    position: relative;
+    transition: var(--transition);
+}
+
+.radio-option input:checked + .radio-checkmark {
+    border-color: var(--primary-lilac);
+    background: var(--primary-lilac);
+}
+
+.radio-option input:checked + .radio-checkmark::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background: var(--white);
+    border-radius: 50%;
+}
+
+.radio-text {
+    font-size: 1rem;
+    color: var(--dark-gray);
+}
+
+.submit-btn {
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-lilac));
+    color: var(--white);
+    padding: 18px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: 'Inter', sans-serif;
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.submit-btn i {
+    margin-right: 10px;
+}
+
+.form-message {
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    display: none;
+    font-weight: 500;
+}
+
+.form-message.success {
+    background: #d4edda;
+    color: #155724;
+    display: block;
+}
+
+.form-message.error {
+    background: #f8d7da;
+    color: #721c24;
+    display: block;
+}
+
+/* Контакты */
+.contacts-section {
+    background: var(--light-gray);
+}
+
+.contacts-info {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background: var(--white);
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.contact-item i {
+    font-size: 2.5rem;
+    color: var(--primary-lilac);
+    margin-top: 5px;
+}
+
+.contact-item h3 {
+    color: var(--dark-gray);
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.contact-item p {
+    color: var(--medium-gray);
+    margin-bottom: 5px;
+}
+
+.chat-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--primary-blue);
+    color: var(--white);
+    padding: 12px 24px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 15px;
+    transition: var(--transition);
+}
+
+.chat-btn:hover {
+    background: var(--primary-lilac);
+    transform: translateY(-2px);
+}
+
+/* Подарки */
+.gifts-section {
+    background: var(--white);
+}
+
+.gifts-text {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--medium-gray);
+}
+
+.gifts-text p {
+    margin-bottom: 1.5rem;
+}
+
+.gifts-note {
+    font-style: italic;
+    color: var(--primary-lilac);
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+/* Финальное приветствие */
+.final-section {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-lilac) 100%);
+    color: var(--white);
+    text-align: center;
+    padding: 100px 0;
+}
+
+.final-heart {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.final-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+.final-names {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-family: 'Playfair Display', serif;
+}
+
+.final-date {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.final-thanks {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    font-style: italic;
+}
+
+/* Анимации */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s ease forwards;
+}
+
+.slide-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideUp 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .date-large {
+        font-size: 2rem;
+    }
+    
+    .time {
+        font-size: 1.5rem;
+    }
+    
+    .countdown-timer {
+        gap: 10px;
+    }
+    
+    .time-unit {
+        min-width: 120px;
+        padding: 1.5rem;
+    }
+    
+    .time-unit .number {
+        font-size: 2.2rem;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .story-photos {
+        gap: 20px;
+    }
+    
+    .photo-circle {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .program-timeline::before {
+        left: 20px;
+    }
+    
+    .program-time {
+        width: 60px;
+        font-size: 1rem;
+    }
+    
+    .location-details {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .color-palette {
+        gap: 20px;
+    }
+    
+    .color-circle {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .wedding-form {
+        padding: 25px;
+    }
+    
+    .contact-item {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    
+    .final-names {
+        font-size: 2.2rem;
+    }
+    
+    .final-date {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        min-height: 90vh;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .time-unit {
+        min-width: 100px;
+        padding: 1rem;
+    }
+    
+    .time-unit .number {
+        font-size: 1.8rem;
+    }
+    
+    .calendar-btn {
+        padding: 14px 28px;
+        font-size: 1rem;
+    }
+    
+    .music-btn {
+        padding: 10px 20px;
+        font-size: 12px;
+    }
+}
+EOF
