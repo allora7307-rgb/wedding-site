@@ -1,269 +1,289 @@
-rm script.js
-cat > script.js << 'EOF'
-// Таймер до свадьбы
-function updateCountdown() {
-    const weddingDate = new Date('2026-02-08T18:00:00').getTime();
-    const now = new Date().getTime();
-    const distance = weddingDate - now;
+// Инициализация после загрузки DOM
+document.addEventListener('DOMContentLoaded', function() {
+    // Параллакс эффект для фона
+    initParallax();
     
-    if (distance < 0) {
-        document.getElementById('countdown').innerHTML = 
-            '<div class="time-unit"><span class="number">🎉</span><span class="label">Сегодня свадьба!</span></div>';
-        return;
-    }
+    // Инициализация календаря
+    initMiniCalendar();
     
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // Инициализация таймера
+    initCountdown();
     
-    // Анимация обновления цифр
-    animateNumber('days', days);
-    animateNumber('hours', hours);
-    animateNumber('minutes', minutes);
-    animateNumber('seconds', seconds);
+    // Инициализация формы
+    initForm();
+    
+    // Инициализация музыки
+    initMusic();
+    
+    // Анимация по скроллу
+    initScrollAnimations();
+});
+
+// Параллакс эффект
+function initParallax() {
+    const heroSection = document.querySelector('.hero');
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * 0.5;
+        heroSection.style.transform = `translate3d(0px, ${rate}px, 0px)`;
+    });
 }
 
-function animateNumber(elementId, newValue) {
-    const element = document.getElementById(elementId);
-    const currentValue = parseInt(element.textContent);
+// Мини-календарь
+function initMiniCalendar() {
+    const weddingDate = new Date(2026, 1, 8); // Февраль - 1 (0 - январь)
+    const currentDate = new Date();
     
-    if (currentValue !== newValue) {
-        element.style.transform = 'scale(1.2)';
-        element.style.color = '#ff6b8b';
+    // Если свадьба уже прошла, показываем прошедшую дату
+    const displayDate = weddingDate < currentDate ? currentDate : weddingDate;
+    
+    const month = displayDate.getMonth();
+    const year = displayDate.getFullYear();
+    
+    // Первый день месяца
+    const firstDay = new Date(year, month, 1);
+    // Последний день месяца
+    const lastDay = new Date(year, month + 1, 0);
+    // Количество дней в месяце
+    const daysInMonth = lastDay.getDate();
+    // День недели первого дня (0 - воскресенье, 1 - понедельник и т.д.)
+    const firstDayIndex = firstDay.getDay();
+    
+    const calendarGrid = document.querySelector('.calendar-grid');
+    calendarGrid.innerHTML = '';
+    
+    // Дни недели
+    const daysOfWeek = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+    daysOfWeek.forEach(day => {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'calendar-day week-day';
+        dayElement.textContent = day;
+        calendarGrid.appendChild(dayElement);
+    });
+    
+    // Пустые ячейки перед первым днем
+    for (let i = 0; i < firstDayIndex; i++) {
+        const emptyDay = document.createElement('div');
+        emptyDay.className = 'calendar-day empty';
+        calendarGrid.appendChild(emptyDay);
+    }
+    
+    // Дни месяца
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'calendar-day';
+        dayElement.textContent = day;
         
-        setTimeout(() => {
-            element.textContent = newValue.toString().padStart(2, '0');
-            element.style.transform = 'scale(1)';
-            element.style.color = '';
-        }, 150);
-    } else {
-        element.textContent = newValue.toString().padStart(2, '0');
+        // Отметить день свадьбы
+        if (year === 2026 && month === 1 && day === 8) { // 8 февраля 2026
+            dayElement.classList.add('wedding-day');
+            dayElement.innerHTML = `${day} <i class="fas fa-heart"></i>`;
+        }
+        
+        calendarGrid.appendChild(dayElement);
     }
 }
 
-// Запуск таймера
-updateCountdown();
-setInterval(updateCountdown, 1000);
-
-// Музыка
-const music = document.getElementById('wedding-music');
-const musicBtn = document.getElementById('music-toggle');
-
-if (music && musicBtn) {
-    musicBtn.addEventListener('click', function() {
-        if (music.paused) {
-            music.play().then(() => {
-                musicBtn.innerHTML = '<i class="fas fa-volume-up"></i><span>Выключить музыку</span>';
-                musicBtn.classList.add('playing');
-            }).catch(e => {
-                console.log('Автовоспроизведение заблокировано');
-                musicBtn.innerHTML = '<i class="fas fa-music"></i><span>Нажмите для включения</span>';
-            });
-        } else {
-            music.pause();
-            musicBtn.innerHTML = '<i class="fas fa-music"></i><span>Включить музыку</span>';
-            musicBtn.classList.remove('playing');
-        }
-    });
+// Таймер обратного отсчета
+function initCountdown() {
+    const weddingDate = new Date('2026-02-08T18:00:00').getTime();
     
-    // Автовоспроизведение без звука
-    music.volume = 0;
-    music.play().then(() => {
-        music.pause();
-        music.currentTime = 0;
-        music.volume = 1;
-    }).catch(e => {
-        console.log('Автовоспроизведение заблокировано');
-    });
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const timeLeft = weddingDate - now;
+        
+        if (timeLeft < 0) {
+            document.getElementById('days').textContent = '000';
+            document.getElementById('hours').textContent = '00';
+            document.getElementById('minutes').textContent = '00';
+            document.getElementById('seconds').textContent = '00';
+            return;
+        }
+        
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+        
+        // Анимация изменения цифр
+        animateValue('days', days, 3);
+        animateValue('hours', hours, 2);
+        animateValue('minutes', minutes, 2);
+        animateValue('seconds', seconds, 2);
+    }
+    
+    // Обновляем каждую секунду
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
 }
 
-// Форма RSVP
-const form = document.getElementById('wedding-form');
-const partnerField = document.getElementById('partner-field');
-const attendanceRadios = document.querySelectorAll('input[name="attendance"]');
-const formMessage = document.getElementById('form-message');
+// Анимация изменения цифр
+function animateValue(elementId, value, digits) {
+    const element = document.getElementById(elementId);
+    const currentValue = parseInt(element.textContent) || 0;
+    
+    if (currentValue === value) return;
+    
+    // Добавляем ведущие нули
+    const formattedValue = value.toString().padStart(digits, '0');
+    
+    // Простая анимация изменения
+    element.style.transform = 'scale(1.1)';
+    element.style.color = '#D8BFD8';
+    
+    setTimeout(() => {
+        element.textContent = formattedValue;
+        element.style.transform = 'scale(1)';
+        element.style.color = '';
+    }, 150);
+}
 
-if (form && attendanceRadios.length > 0) {
-    // Показать/скрыть поле для сопровождающих
+// Инициализация формы
+function initForm() {
+    const form = document.getElementById('guest-form');
+    const attendanceRadios = document.querySelectorAll('input[name="attendance"]');
+    const companionField = document.getElementById('companion-field');
+    const foodOtherCheckbox = document.querySelector('input[name="food"][value="other"]');
+    const foodOtherTextarea = document.getElementById('food-other');
+    
+    // Показать/скрыть поле для имен спутников
     attendanceRadios.forEach(radio => {
         radio.addEventListener('change', function() {
-            if (this.value === 'with-partner') {
-                partnerField.style.display = 'block';
+            if (this.value === 'couple') {
+                companionField.style.display = 'block';
             } else {
-                partnerField.style.display = 'none';
+                companionField.style.display = 'none';
             }
         });
     });
     
-    // Отправка формы
-    form.addEventListener('submit', async function(e) {
+    // Показать/скрыть текстовое поле для другого варианта еды
+    foodOtherCheckbox.addEventListener('change', function() {
+        foodOtherTextarea.style.display = this.checked ? 'block' : 'none';
+    });
+    
+    // Обработка отправки формы
+    form.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
+        // Собираем данные формы
+        const formData = new FormData(this);
+        const data = {};
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
         
-        // Собираем сообщение для Telegram
-        const message = `
-🎉 НОВЫЙ ОТВЕТ НА ПРИГЛАШЕНИЕ
-
-👤 Гость: ${data.name} ${data.surname}
-✅ Присутствие: ${getAttendanceText(data.attendance)}
-${data.attendance === 'with-partner' ? `👥 Сопровождающие: ${data.partner || 'не указаны'}` : ''}
-💬 Пожелания: ${data.wishes || 'нет'}
-        `.trim();
+        // Здесь можно отправить данные на сервер или в Telegram бот
+        // Пример для Telegram бота:
+        // sendToTelegram(data);
         
-        // Здесь будет отправка в Telegram
-        // Нужно указать ваш токен бота и chat_id
-        const botToken = 'ВАШ_BOT_TOKEN'; // Замените на ваш
-        const chatId = 'ВАШ_CHAT_ID'; // Замените на ваш
+        // Показываем сообщение об успехе
+        alert('Спасибо! Ваша анкета отправлена. Мы будем ждать вас на нашей свадьбе! ❤️');
+        form.reset();
         
-        if (botToken === 'ВАШ_BOT_TOKEN') {
-            // Демо-режим - показываем сообщение
-            showFormMessage('Форма работает! Для реальной отправки настройте Telegram бота.', 'success');
-            console.log('Сообщение для Telegram:', message);
-            
-            // Очищаем форму через 3 секунды
-            setTimeout(() => {
-                form.reset();
-                partnerField.style.display = 'none';
-                showFormMessage('', '');
-            }, 3000);
-        } else {
-            // Реальная отправка в Telegram
-            try {
-                const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        chat_id: chatId,
-                        text: message,
-                        parse_mode: 'HTML'
-                    })
-                });
-                
-                if (response.ok) {
-                    showFormMessage('Ваш ответ успешно отправлен! Спасибо!', 'success');
-                    form.reset();
-                    partnerField.style.display = 'none';
-                    
-                    // Скрываем сообщение через 5 секунд
-                    setTimeout(() => {
-                        showFormMessage('', '');
-                    }, 5000);
-                } else {
-                    showFormMessage('Ошибка при отправке. Пожалуйста, попробуйте ещё раз.', 'error');
-                }
-            } catch (error) {
-                console.error('Ошибка:', error);
-                showFormMessage('Ошибка сети. Пожалуйста, проверьте подключение.', 'error');
-            }
-        }
+        // Скрываем дополнительные поля
+        companionField.style.display = 'none';
+        foodOtherTextarea.style.display = 'none';
     });
 }
 
-function getAttendanceText(value) {
-    switch(value) {
-        case 'yes': return 'Да, с удовольствием!';
-        case 'with-partner': return 'Да, с парой/семьёй';
-        case 'no': return 'К сожалению, не смогу';
-        default: return 'не указано';
-    }
-}
-
-function showFormMessage(text, type) {
-    if (!formMessage) return;
+// Инициализация музыки
+function initMusic() {
+    const musicToggle = document.getElementById('music-toggle');
+    const musicIcon = musicToggle.querySelector('i');
+    const backgroundMusic = document.getElementById('background-music');
     
-    formMessage.textContent = text;
-    formMessage.className = `form-message ${type}`;
-    formMessage.style.display = text ? 'block' : 'none';
+    let isPlaying = false;
+    
+    musicToggle.addEventListener('click', function() {
+        if (isPlaying) {
+            backgroundMusic.pause();
+            musicIcon.className = 'fas fa-volume-mute';
+        } else {
+            // Воспроизводим с задержкой для обхода ограничений автоплея
+            backgroundMusic.play().then(() => {
+                musicIcon.className = 'fas fa-volume-up';
+                isPlaying = true;
+            }).catch(error => {
+                console.log('Автовоспроизведение заблокировано:', error);
+                alert('Нажмите на кнопку музыки еще раз, чтобы включить звук');
+            });
+        }
+        isPlaying = !isPlaying;
+    });
 }
 
 // Анимация при скролле
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('animated');
-        }
-    });
-}, observerOptions);
-
-// Наблюдаем за всеми анимируемыми элементами
-document.querySelectorAll('.fade-in, .slide-up').forEach(el => {
-    observer.observe(el);
-});
-
-// Плавный скролл для якорных ссылок
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        if (targetId === '#' || targetId === '#!') return;
-        
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-            window.scrollTo({
-                top: targetElement.offsetTop - 80,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
-
-// Создание файла .ics для календаря
-function createICSCalendar() {
-    const icsContent = `BEGIN:VCALENDAR
-VERSION:2.0
-CALSCALE:GREGORIAN
-BEGIN:VEVENT
-SUMMARY:Свадьба Кристалины и Александра
-DTSTART:20260208T180000
-DTEND:20260208T230000
-LOCATION:Ресторан "Лазурный", ул. Тверская, 15, Москва
-DESCRIPTION:Приглашение на свадьбу Кристалины и Александра\\n\\nСбор гостей в 18:00\\n\\nС любовью, Кристалина и Александр
-END:VEVENT
-END:VCALENDAR`;
-
-    const blob = new Blob([icsContent], { type: 'text/calendar' });
-    const url = window.URL.createObjectURL(blob);
+function initScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
     
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'свадьба_кристалина_александр.ics';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-}
-
-// Привязываем создание .ics к кнопке календаря
-const calendarBtn = document.querySelector('.calendar-btn');
-if (calendarBtn) {
-    calendarBtn.addEventListener('click', function(e) {
-        if (!this.href || this.href.endsWith('#')) {
-            e.preventDefault();
-            createICSCalendar();
-        }
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in-view');
+            }
+        });
+    }, observerOptions);
+    
+    // Наблюдаем за элементами для анимации
+    const animatedElements = document.querySelectorAll('.timeline-item, .photo-circle, .color-circle');
+    animatedElements.forEach(element => {
+        observer.observe(element);
     });
 }
 
-// Загрузка изображений с заглушками
-document.addEventListener('DOMContentLoaded', function() {
-    const images = document.querySelectorAll('img');
-    images.forEach(img => {
-        img.onerror = function() {
-            // Если фото не загрузилось, оставляем как есть (уже есть заглушки в HTML)
-            console.log('Изображение не загрузилось:', img.src);
-        };
-    });
+// Функция для отправки в Telegram (нужно настроить бота)
+function sendToTelegram(data) {
+    const botToken = 'YOUR_BOT_TOKEN';
+    const chatId = 'YOUR_CHAT_ID';
     
-    // Инициализация
-    console.log('Свадебный сайт загружен!');
-});
-EOF
+    const message = `
+Новая анкета гостя:
+Имя: ${data.name}
+Фамилия: ${data.surname}
+Присутствие: ${data.attendance}
+${data.attendance === 'couple' ? `Спутники: ${data.companion}` : ''}
+Напитки: ${data.drinks || 'не указано'}
+Аллергии: ${data.allergies || 'нет'}
+Горячее: ${data.food ? data.food.join(', ') : 'не указано'}
+${data['food-other'] ? `Другой вариант: ${data['food-other']}` : ''}
+Транспорт: ${data.transport || 'не указано'}
+Помощь: ${data.help || 'не требуется'}
+Комментарий: ${data.comment || 'нет'}
+    `.trim();
+    
+    fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            chat_id: chatId,
+            text: message,
+            parse_mode: 'HTML'
+        })
+    });
+}
+
+// Добавляем стили для анимации при скролле
+const style = document.createElement('style');
+style.textContent = `
+    .animate-in-view {
+        animation: slideUp 0.8s ease-out forwards;
+    }
+    
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+`;
+document.head.appendChild(style);
