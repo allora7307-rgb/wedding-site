@@ -1,98 +1,54 @@
-// Инициализация после загрузки DOM
 document.addEventListener('DOMContentLoaded', function() {
-    // Параллакс эффект для фона
+    // Параллакс эффект
     initParallax();
+    
+    // Таймер обратного отсчета
+    initCountdown();
+    
+    // Обработка формы
+    initForm();
+    
+    // Управление музыкой
+    initMusic();
+    
+    // Анимация при скролле
+    initScrollAnimations();
     
     // Инициализация календаря
     initMiniCalendar();
-    
-    // Инициализация таймера
-    initCountdown();
-    
-    // Инициализация формы
-    initForm();
-    
-    // Инициализация музыки
-    initMusic();
-    
-    // Анимация по скроллу
-    initScrollAnimations();
 });
 
-// Параллакс эффект
+// Параллакс эффект для фона
 function initParallax() {
-    const heroSection = document.querySelector('.hero');
     window.addEventListener('scroll', function() {
         const scrolled = window.pageYOffset;
-        const rate = scrolled * 0.5;
-        heroSection.style.transform = `translate3d(0px, ${rate}px, 0px)`;
-    });
-}
-
-// Мини-календарь
-function initMiniCalendar() {
-    const weddingDate = new Date(2026, 1, 8); // Февраль - 1 (0 - январь)
-    const currentDate = new Date();
-    
-    // Если свадьба уже прошла, показываем прошедшую дату
-    const displayDate = weddingDate < currentDate ? currentDate : weddingDate;
-    
-    const month = displayDate.getMonth();
-    const year = displayDate.getFullYear();
-    
-    // Первый день месяца
-    const firstDay = new Date(year, month, 1);
-    // Последний день месяца
-    const lastDay = new Date(year, month + 1, 0);
-    // Количество дней в месяце
-    const daysInMonth = lastDay.getDate();
-    // День недели первого дня (0 - воскресенье, 1 - понедельник и т.д.)
-    const firstDayIndex = firstDay.getDay();
-    
-    const calendarGrid = document.querySelector('.calendar-grid');
-    calendarGrid.innerHTML = '';
-    
-    // Дни недели
-    const daysOfWeek = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
-    daysOfWeek.forEach(day => {
-        const dayElement = document.createElement('div');
-        dayElement.className = 'calendar-day week-day';
-        dayElement.textContent = day;
-        calendarGrid.appendChild(dayElement);
-    });
-    
-    // Пустые ячейки перед первым днем
-    for (let i = 0; i < firstDayIndex; i++) {
-        const emptyDay = document.createElement('div');
-        emptyDay.className = 'calendar-day empty';
-        calendarGrid.appendChild(emptyDay);
-    }
-    
-    // Дни месяца
-    for (let day = 1; day <= daysInMonth; day++) {
-        const dayElement = document.createElement('div');
-        dayElement.className = 'calendar-day';
-        dayElement.textContent = day;
+        const parallaxBg = document.querySelector('.parallax-bg');
         
-        // Отметить день свадьбы
-        if (year === 2026 && month === 1 && day === 8) { // 8 февраля 2026
-            dayElement.classList.add('wedding-day');
-            dayElement.innerHTML = `${day} <i class="fas fa-heart"></i>`;
+        if (parallaxBg) {
+            const rate = scrolled * 0.3;
+            parallaxBg.style.transform = `translate3d(0, ${rate}px, 0)`;
         }
         
-        calendarGrid.appendChild(dayElement);
-    }
+        // Анимация самолетиков
+        const planes = document.querySelectorAll('.fas.fa-plane');
+        planes.forEach((plane, index) => {
+            const speed = 0.5 + (index * 0.1);
+            const yOffset = scrolled * speed * 0.1;
+            plane.style.transform = `translateY(${yOffset}px) rotate(${yOffset}deg)`;
+        });
+    });
 }
 
-// Таймер обратного отсчета
+// Таймер до свадьбы
 function initCountdown() {
-    const weddingDate = new Date('2026-02-08T18:00:00').getTime();
+    const weddingDate = new Date('2025-09-27T15:30:00').getTime();
     
     function updateCountdown() {
         const now = new Date().getTime();
         const timeLeft = weddingDate - now;
         
         if (timeLeft < 0) {
+            // Свадьба уже прошла
             document.getElementById('days').textContent = '000';
             document.getElementById('hours').textContent = '00';
             document.getElementById('minutes').textContent = '00';
@@ -105,111 +61,122 @@ function initCountdown() {
         const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
         
-        // Анимация изменения цифр
-        animateValue('days', days, 3);
-        animateValue('hours', hours, 2);
-        animateValue('minutes', minutes, 2);
-        animateValue('seconds', seconds, 2);
+        // Анимация цифр
+        animateNumber('days', days, 3);
+        animateNumber('hours', hours, 2);
+        animateNumber('minutes', minutes, 2);
+        animateNumber('seconds', seconds, 2);
     }
     
-    // Обновляем каждую секунду
+    function animateNumber(elementId, value, digits) {
+        const element = document.getElementById(elementId);
+        const currentValue = parseInt(element.textContent) || 0;
+        
+        if (currentValue !== value) {
+            element.style.transform = 'scale(1.2)';
+            element.style.color = '#FFFFFF';
+            
+            setTimeout(() => {
+                element.textContent = value.toString().padStart(digits, '0');
+                element.style.transform = 'scale(1)';
+                element.style.color = '';
+            }, 150);
+        }
+    }
+    
     updateCountdown();
     setInterval(updateCountdown, 1000);
 }
 
-// Анимация изменения цифр
-function animateValue(elementId, value, digits) {
-    const element = document.getElementById(elementId);
-    const currentValue = parseInt(element.textContent) || 0;
-    
-    if (currentValue === value) return;
-    
-    // Добавляем ведущие нули
-    const formattedValue = value.toString().padStart(digits, '0');
-    
-    // Простая анимация изменения
-    element.style.transform = 'scale(1.1)';
-    element.style.color = '#D8BFD8';
-    
-    setTimeout(() => {
-        element.textContent = formattedValue;
-        element.style.transform = 'scale(1)';
-        element.style.color = '';
-    }, 150);
-}
-
-// Инициализация формы
+// Обработка формы
 function initForm() {
-    const form = document.getElementById('guest-form');
+    const form = document.getElementById('rsvp-form');
     const attendanceRadios = document.querySelectorAll('input[name="attendance"]');
-    const companionField = document.getElementById('companion-field');
-    const foodOtherCheckbox = document.querySelector('input[name="food"][value="other"]');
-    const foodOtherTextarea = document.getElementById('food-other');
+    const partnerField = document.getElementById('partner-field');
     
-    // Показать/скрыть поле для имен спутников
+    // Показать/скрыть поле для имени спутника
     attendanceRadios.forEach(radio => {
         radio.addEventListener('change', function() {
-            if (this.value === 'couple') {
-                companionField.style.display = 'block';
+            if (this.value === 'with_partner') {
+                partnerField.style.display = 'block';
             } else {
-                companionField.style.display = 'none';
+                partnerField.style.display = 'none';
             }
         });
     });
     
-    // Показать/скрыть текстовое поле для другого варианта еды
-    foodOtherCheckbox.addEventListener('change', function() {
-        foodOtherTextarea.style.display = this.checked ? 'block' : 'none';
-    });
-    
-    // Обработка отправки формы
+    // Отправка формы
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // Собираем данные формы
         const formData = new FormData(this);
         const data = {};
         formData.forEach((value, key) => {
             data[key] = value;
         });
         
-        // Здесь можно отправить данные на сервер или в Telegram бот
-        // Пример для Telegram бота:
-        // sendToTelegram(data);
+        // Здесь будет отправка данных в Telegram или на сервер
+        // Временное решение - показываем сообщение
+        showNotification('Спасибо! Ваш ответ сохранен. Ждем вас на свадьбе! ❤️');
         
-        // Показываем сообщение об успехе
-        alert('Спасибо! Ваша анкета отправлена. Мы будем ждать вас на нашей свадьбе! ❤️');
+        // Сброс формы
         form.reset();
-        
-        // Скрываем дополнительные поля
-        companionField.style.display = 'none';
-        foodOtherTextarea.style.display = 'none';
+        partnerField.style.display = 'none';
     });
 }
 
-// Инициализация музыки
+// Управление музыкой
 function initMusic() {
-    const musicToggle = document.getElementById('music-toggle');
-    const musicIcon = musicToggle.querySelector('i');
+    const musicBtn = document.getElementById('music-toggle');
+    const musicIcon = musicBtn.querySelector('i');
     const backgroundMusic = document.getElementById('background-music');
     
     let isPlaying = false;
     
-    musicToggle.addEventListener('click', function() {
+    musicBtn.addEventListener('click', function() {
         if (isPlaying) {
             backgroundMusic.pause();
             musicIcon.className = 'fas fa-volume-mute';
+            musicBtn.style.transform = 'scale(1)';
         } else {
-            // Воспроизводим с задержкой для обхода ограничений автоплея
-            backgroundMusic.play().then(() => {
-                musicIcon.className = 'fas fa-volume-up';
-                isPlaying = true;
-            }).catch(error => {
-                console.log('Автовоспроизведение заблокировано:', error);
-                alert('Нажмите на кнопку музыки еще раз, чтобы включить звук');
-            });
+            // Пытаемся воспроизвести
+            const playPromise = backgroundMusic.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    musicIcon.className = 'fas fa-volume-up';
+                    isPlaying = true;
+                    musicBtn.style.transform = 'scale(1.1)';
+                }).catch(error => {
+                    console.log('Автовоспроизведение заблокировано:', error);
+                    // Показываем сообщение, что нужно кликнуть еще раз
+                    musicBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    musicBtn.style.animation = 'pulse 1s infinite';
+                    
+                    // Сбрасываем состояние через 3 секунды
+                    setTimeout(() => {
+                        musicBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                        musicBtn.style.animation = '';
+                    }, 3000);
+                });
+            }
         }
         isPlaying = !isPlaying;
+    });
+    
+    // Автопауза при скролле (опционально)
+    let scrollTimer;
+    window.addEventListener('scroll', function() {
+        if (isPlaying) {
+            clearTimeout(scrollTimer);
+            backgroundMusic.volume = 0.3;
+            
+            scrollTimer = setTimeout(() => {
+                if (isPlaying) {
+                    backgroundMusic.volume = 1;
+                }
+            }, 500);
+        }
     });
 }
 
@@ -223,67 +190,151 @@ function initScrollAnimations() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in-view');
+                entry.target.classList.add('animated');
             }
         });
     }, observerOptions);
     
-    // Наблюдаем за элементами для анимации
-    const animatedElements = document.querySelectorAll('.timeline-item, .photo-circle, .color-circle');
+    // Наблюдаем за анимируемыми элементами
+    const animatedElements = document.querySelectorAll(
+        '.story-item, .program-item, .detail-card, .color-item, .contact-item'
+    );
+    
     animatedElements.forEach(element => {
         observer.observe(element);
     });
+    
+    // Добавляем CSS для анимации
+    const style = document.createElement('style');
+    style.textContent = `
+        .animated {
+            animation: slideUp 0.8s ease-out forwards;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    `;
+    document.head.appendChild(style);
 }
 
-// Функция для отправки в Telegram (нужно настроить бота)
-function sendToTelegram(data) {
-    const botToken = 'YOUR_BOT_TOKEN';
-    const chatId = 'YOUR_CHAT_ID';
+// Мини-календарь
+function initMiniCalendar() {
+    const weddingDate = new Date(2025, 8, 27); // Сентябрь 27, 2025
+    const monthNames = [
+        'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+        'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
+    ];
     
-    const message = `
-Новая анкета гостя:
-Имя: ${data.name}
-Фамилия: ${data.surname}
-Присутствие: ${data.attendance}
-${data.attendance === 'couple' ? `Спутники: ${data.companion}` : ''}
-Напитки: ${data.drinks || 'не указано'}
-Аллергии: ${data.allergies || 'нет'}
-Горячее: ${data.food ? data.food.join(', ') : 'не указано'}
-${data['food-other'] ? `Другой вариант: ${data['food-other']}` : ''}
-Транспорт: ${data.transport || 'не указано'}
-Помощь: ${data.help || 'не требуется'}
-Комментарий: ${data.comment || 'нет'}
-    `.trim();
-    
-    fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            chat_id: chatId,
-            text: message,
-            parse_mode: 'HTML'
-        })
-    });
+    // Можно добавить календарь позже, если нужно
+    console.log('Дата свадьбы:', weddingDate.toLocaleDateString());
 }
 
-// Добавляем стили для анимации при скролле
-const style = document.createElement('style');
-style.textContent = `
-    .animate-in-view {
-        animation: slideUp 0.8s ease-out forwards;
-    }
+// Всплывающее уведомление
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.innerHTML = `
+        <div class="notification-content">
+            <i class="fas fa-check-circle"></i>
+            <span>${message}</span>
+        </div>
+    `;
     
-    @keyframes slideUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
+    // Добавляем стили
+    const style = document.createElement('style');
+    style.textContent = `
+        .notification {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-lilac));
+            color: white;
+            padding: 20px 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 10000;
+            animation: slideInRight 0.5s ease-out, fadeOut 0.5s ease-out 3s forwards;
+            max-width: 400px;
         }
-        to {
-            opacity: 1;
-            transform: translateY(0);
+        
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
-    }
-`;
-document.head.appendChild(style);
+        
+        .notification i {
+            font-size: 1.5rem;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+    `;
+    
+    document.head.appendChild(style);
+    document.body.appendChild(notification);
+    
+    // Удаляем уведомление через 3.5 секунды
+    setTimeout(() => {
+        notification.remove();
+        style.remove();
+    }, 3500);
+}
+
+// Добавление видео позже
+function addVideoLater(videoUrl) {
+    // Эта функция будет добавлена позже, когда у вас будет видео
+    const videoSection = `
+        <section class="video-section wave-section">
+            <div class="wave-top"></div>
+            <div class="container">
+                <div class="section-header">
+                    <h2>Наше видео</h2>
+                    <div class="plane-divider">
+                        <i class="fas fa-plane"></i>
+                        <div class="line"></div>
+                        <i class="fas fa-video"></i>
+                        <div class="line"></div>
+                        <i class="fas fa-plane"></i>
+                    </div>
+                </div>
+                <div class="video-container">
+                    <video controls playsinline preload="metadata">
+                        <source src="${videoUrl}" type="video/mp4">
+                        Ваш браузер не поддерживает видео.
+                    </video>
+                </div>
+            </div>
+        </section>
+    `;
+    
+    // Вставить перед секцией таймера
+    const countdownSection = document.querySelector('.countdown-section');
+    countdownSection.insertAdjacentHTML('beforebegin', videoSection);
+}
