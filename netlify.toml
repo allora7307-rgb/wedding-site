@@ -7,13 +7,24 @@
   to = "/index.html"
   status = 200
 
-# Оптимизация кэширования
 [[headers]]
   for = "/*"
   [headers.values]
     cache-control = "public, max-age=3600"
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
 
 [[headers]]
   for = "/assets/*"
   [headers.values]
     cache-control = "public, max-age=31536000"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    cache-control = "public, max-age=604800"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    cache-control = "public, max-age=604800"
