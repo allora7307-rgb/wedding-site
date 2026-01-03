@@ -3,133 +3,291 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Кристалина & Александр | Свадьба</title>
+    <title>Лора & Данила | Свадьба 27.09.2025</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Кнопка включения музыки -->
-    <button id="music-toggle" class="music-toggle">
+    <!-- Фоновые элементы -->
+    <div class="bg-planes">
+        <i class="fas fa-plane plane-1"></i>
+        <i class="fas fa-plane plane-2"></i>
+        <i class="fas fa-plane plane-3"></i>
+    </div>
+    
+    <!-- Кнопка музыки -->
+    <button id="music-toggle" class="music-btn">
         <i class="fas fa-volume-mute"></i>
     </button>
-
-    <!-- Аудио элемент -->
     <audio id="background-music" loop>
         <source src="assets/music.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Главная обложка с параллаксом -->
-    <section class="hero parallax-section" id="hero">
-        <div class="overlay"></div>
+    <!-- Главный экран -->
+    <section class="hero-section">
+        <div class="parallax-bg" data-speed="0.3"></div>
+        <div class="overlay-gradient"></div>
+        
         <div class="hero-content">
-            <h1 class="animate-fade-in">Кристалина & Александр</h1>
-            <p class="subtitle animate-slide-up">Приглашают вас на свадьбу</p>
-            <div class="date animate-slide-up-delay">
-                <p class="date-main">8 февраля 2026</p>
-                <p class="date-time">Сбор гостей — 18:00</p>
-            </div>
+            <div class="invitation-label">ПРИГЛАШЕНИЕ НА СВАДЬБУ</div>
+            <h1 class="couple-names">Лора & Данила</h1>
+            <div class="wedding-date">27.09.2025</div>
+            
             <div class="scroll-indicator">
-                <i class="fas fa-plane"></i>
-                <p>прокрутите</p>
+                <div class="arrow-down">
+                    <i class="fas fa-chevron-down"></i>
+                    <i class="fas fa-chevron-down"></i>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Блок истории предложения -->
-    <section class="story-section" id="story">
+    <!-- Приветственный текст -->
+    <section class="welcome-section wave-section">
+        <div class="wave-top"></div>
         <div class="container">
-            <div class="story-content">
-                <h2 class="section-title">Этот момент стал началом нашей истории</h2>
-                <div class="story-photos">
+            <div class="welcome-card">
+                <h2>ДОРОГИЕ РОДНЫЕ И БЛИЗКИЕ!</h2>
+                <div class="welcome-text">
+                    <p>Совсем скоро в нашей жизни предстоят счастливые перемены!</p>
+                    <p>Мы хотим, чтобы в этот особенный день рядом были самые близкие и дорогие для нас люди!</p>
+                    <p class="highlight">Мы приглашаем провести с нами этот незабываемый день - день нашей свадьбы!</p>
+                </div>
+                <div class="heart-decoration">
+                    <i class="fas fa-heart"></i>
+                    <i class="fas fa-heart"></i>
+                    <i class="fas fa-heart"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- История любви -->
+    <section class="story-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Наша история</h2>
+                <div class="plane-divider">
+                    <i class="fas fa-plane"></i>
+                    <div class="line"></div>
+                    <i class="fas fa-heart"></i>
+                    <div class="line"></div>
+                    <i class="fas fa-plane"></i>
+                </div>
+            </div>
+            
+            <div class="story-timeline">
+                <div class="story-item">
+                    <div class="story-year">2020</div>
+                    <div class="story-content">
+                        <h3>Первая встреча</h3>
+                        <p>Наше путешествие началось с неожиданной встречи</p>
+                    </div>
+                    <div class="story-icon"><i class="fas fa-map-marker-alt"></i></div>
+                </div>
+                
+                <div class="story-item">
+                    <div class="story-year">2023</div>
+                    <div class="story-content">
+                        <h3>Предложение</h3>
+                        <p>Под облаками, в нашем любимом месте</p>
+                    </div>
+                    <div class="story-icon"><i class="fas fa-ring"></i></div>
+                </div>
+                
+                <div class="story-item">
+                    <div class="story-year">2025</div>
+                    <div class="story-content">
+                        <h3>Свадьба</h3>
+                        <p>Начинаем новую главу вместе</p>
+                    </div>
+                    <div class="story-icon"><i class="fas fa-heart"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Детские фото -->
+    <section class="childhood-section wave-section">
+        <div class="wave-top"></div>
+        <div class="container">
+            <div class="childhood-content">
+                <div class="child-photo left">
                     <div class="photo-frame">
-                        <div class="photo-overlap">
-                            <div class="photo-1"></div>
-                            <div class="photo-2"></div>
+                        <div class="photo-inner" style="background-image: url('assets/images/child-bride.jpg');"></div>
+                    </div>
+                    <h3>Лора</h3>
+                    <p>Всегда мечтала о большом приключении</p>
+                </div>
+                
+                <div class="heart-animation">
+                    <div class="love-equation">
+                        <span>Лора</span>
+                        <span class="plus">+</span>
+                        <span>Данила</span>
+                        <span class="equals">=</span>
+                        <span class="heart-pulse">∞</span>
+                    </div>
+                </div>
+                
+                <div class="child-photo right">
+                    <div class="photo-frame">
+                        <div class="photo-inner" style="background-image: url('assets/images/child-groom.jpg');"></div>
+                    </div>
+                    <h3>Данила</h3>
+                    <p>Искал спутницу для путешествий</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Дата и место -->
+    <section class="details-section">
+        <div class="container">
+            <div class="details-grid">
+                <!-- Дата -->
+                <div class="detail-card date-card">
+                    <div class="card-header">
+                        <i class="far fa-calendar-alt"></i>
+                        <h3>ДАТА</h3>
+                    </div>
+                    <div class="date-display">
+                        <div class="date-number">27</div>
+                        <div class="date-month-year">
+                            <span class="month">СЕНТЯБРЯ</span>
+                            <span class="year">2025</span>
+                        </div>
+                    </div>
+                    <div class="time-info">
+                        <i class="far fa-clock"></i>
+                        <span>Сбор гостей 15:30</span>
+                    </div>
+                </div>
+                
+                <!-- Место -->
+                <div class="detail-card location-card">
+                    <div class="card-header">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>МЕСТО ПРОВЕДЕНИЯ</h3>
+                    </div>
+                    <div class="location-info">
+                        <h4>РЕСТОРАН CEDER</h4>
+                        <p>г. Москва, ул. Успенская 8</p>
+                    </div>
+                    <div class="map-placeholder">
+                        <i class="fas fa-map"></i>
+                        <p>Карта будет доступна ближе к дате</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Программа -->
+    <section class="program-section wave-section">
+        <div class="wave-top"></div>
+        <div class="container">
+            <div class="section-header">
+                <h2>ПРОГРАММА МЕРОПРИЯТИЯ</h2>
+                <div class="plane-divider">
+                    <i class="fas fa-plane"></i>
+                    <div class="line"></div>
+                    <i class="far fa-clock"></i>
+                    <div class="line"></div>
+                    <i class="fas fa-plane"></i>
+                </div>
+            </div>
+            
+            <div class="program-timeline">
+                <div class="program-item">
+                    <div class="program-time">15:30</div>
+                    <div class="program-content">
+                        <h3>Сбор гостей</h3>
+                        <p>Приветственный коктейль</p>
+                    </div>
+                    <div class="program-icon"><i class="fas fa-glass-cheers"></i></div>
+                </div>
+                
+                <div class="program-item">
+                    <div class="program-time">16:00</div>
+                    <div class="program-content">
+                        <h3>Церемония</h3>
+                        <p>Торжественное бракосочетание</p>
+                    </div>
+                    <div class="program-icon"><i class="fas fa-heart"></i></div>
+                </div>
+                
+                <div class="program-item">
+                    <div class="program-time">17:00</div>
+                    <div class="program-content">
+                        <h3>Банкет</h3>
+                        <p>Праздничный ужин</p>
+                    </div>
+                    <div class="program-icon"><i class="fas fa-utensils"></i></div>
+                </div>
+                
+                <div class="program-item">
+                    <div class="program-time">22:00</div>
+                    <div class="program-content">
+                        <h3>Фейерверк</h3>
+                        <p>Завершение праздника</p>
+                    </div>
+                    <div class="program-icon"><i class="fas fa-fire"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Дресс-код -->
+    <section class="dresscode-section">
+        <div class="container">
+            <div class="dresscode-card">
+                <div class="card-header">
+                    <i class="fas fa-tshirt"></i>
+                    <h2>ДРЕСС-КОД</h2>
+                </div>
+                
+                <div class="dresscode-content">
+                    <p class="dresscode-text">
+                        Мы будем очень рады видеть вас в нарядах, отражающих нашу тему.<br>
+                        Пусть ваши образы добавят ярких акцентов и создадут незабываемую атмосферу!
+                    </p>
+                    
+                    <div class="color-palette">
+                        <div class="color-item">
+                            <div class="color-circle" style="background-color: #87CEEB;"></div>
+                            <span>Небесно-голубой</span>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-circle" style="background-color: #D8BFD8;"></div>
+                            <span>Нежный лиловый</span>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-circle" style="background-color: #B0E0E6;"></div>
+                            <span>Пудровый</span>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-circle" style="background-color: #E6E6FA;"></div>
+                            <span>Лавандовый</span>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-circle" style="background-color: #AFEEEE;"></div>
+                            <span>Бирюзовый</span>
                         </div>
                     </div>
                 </div>
-                <div class="story-text">
-                    <p class="quote animate-text">Он задал вопрос</p>
-                    <p class="quote animate-text-delay">Она сказала «да»</p>
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- Блок "Мы + любовь" с детскими фото -->
-    <section class="love-section" id="love">
+    <!-- Таймер -->
+    <section class="countdown-section wave-section">
+        <div class="wave-top"></div>
         <div class="container">
-            <div class="love-content">
-                <div class="love-equation">
-                    <div class="name name-left">Кристалина</div>
-                    <div class="plus">+</div>
-                    <div class="name name-right">Александр</div>
-                    <div class="equals">=</div>
-                    <div class="heart-pulse">❤️</div>
-                </div>
-                <div class="child-photos">
-                    <div class="photo-circle photo-left">
-                        <div class="photo-inner"></div>
-                        <p class="photo-caption">Кристалина</p>
-                    </div>
-                    <div class="photo-circle photo-right">
-                        <div class="photo-inner"></div>
-                        <p class="photo-caption">Александр</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Блок приглашения -->
-    <section class="invitation-section" id="invitation">
-        <div class="container">
-            <div class="invitation-card">
-                <h2 class="section-title">Дорогие родные и друзья!</h2>
-                <p class="invitation-text">
-                    Мы будем счастливы разделить с вами самый важный день нашей жизни.
-                    Приглашаем вас стать частью нашего праздника и украсить его своим присутствием ❤️
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Блок с датой и календарем -->
-    <section class="date-section" id="date">
-        <div class="container">
-            <div class="date-card">
-                <h2 class="section-title">Дата свадьбы</h2>
-                <div class="date-display">
-                    <div class="date-number">8</div>
-                    <div class="date-month-year">
-                        <p class="month">Февраля</p>
-                        <p class="year">2026</p>
-                    </div>
-                </div>
-                <p class="time-info">Сбор гостей — 18:00</p>
-                
-                <div class="calendar-mini">
-                    <div class="calendar-header">
-                        <span>Февраль 2026</span>
-                    </div>
-                    <div class="calendar-grid">
-                        <!-- Календарь будет сгенерирован через JS -->
-                    </div>
-                </div>
-                
-                <a href="#" class="calendar-btn">
-                    <i class="far fa-calendar-plus"></i> Добавить в календарь
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Таймер до свадьбы -->
-    <section class="countdown-section" id="countdown">
-        <div class="container">
-            <h2 class="section-title">До свадьбы осталось</h2>
+            <h2>До свадьбы осталось</h2>
             <div class="countdown-container">
                 <div class="countdown-item">
                     <div class="countdown-number" id="days">000</div>
@@ -151,225 +309,100 @@
         </div>
     </section>
 
-    <!-- Видеоблог -->
-    <section class="video-section" id="video">
-        <div class="container">
-            <h2 class="section-title">Немного о нас</h2>
-            <div class="video-container">
-                <video controls playsinline preload="metadata" poster="assets/video-poster.jpg">
-                    <source src="assets/video.mp4" type="video/mp4">
-                    Ваш браузер не поддерживает видео.
-                </video>
-            </div>
-        </div>
-    </section>
-
-    <!-- Тайминг дня -->
-    <section class="timeline-section" id="timeline">
-        <div class="container">
-            <h2 class="section-title">Тайминг дня</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-time">18:00</div>
-                    <div class="timeline-content">
-                        <h3>Сбор гостей</h3>
-                        <p>Встреча и приветствие</p>
-                    </div>
-                    <div class="timeline-icon"><i class="fas fa-glass-cheers"></i></div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-time">18:30</div>
-                    <div class="timeline-content">
-                        <h3>Церемония</h3>
-                        <p>Торжественная часть</p>
-                    </div>
-                    <div class="timeline-icon"><i class="fas fa-heart"></i></div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-time">19:30</div>
-                    <div class="timeline-content">
-                        <h3>Банкет</h3>
-                        <p>Праздничный ужин</p>
-                    </div>
-                    <div class="timeline-icon"><i class="fas fa-utensils"></i></div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-time">22:00</div>
-                    <div class="timeline-content">
-                        <h3>Танцы и сюрпризы</h3>
-                        <p>Развлекательная программа</p>
-                    </div>
-                    <div class="timeline-icon"><i class="fas fa-music"></i></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Место проведения -->
-    <section class="location-section" id="location">
-        <div class="container">
-            <div class="location-card">
-                <h2 class="section-title">Место проведения</h2>
-                <p class="location-text">(уточняется)</p>
-                <div class="location-placeholder">
-                    <i class="fas fa-map-marked-alt"></i>
-                    <p>Адрес будет добавлен ближе к дате свадьбы</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Дресс-код -->
-    <section class="dresscode-section" id="dresscode">
-        <div class="container">
-            <h2 class="section-title">Дресс-код</h2>
-            <p class="dresscode-text">
-                Свободный стиль<br>
-                Нам будет приятно видеть вас в оттенках нашей палитры
-            </p>
-            <div class="color-palette">
-                <div class="color-circle" style="background-color: #87CEEB;"></div>
-                <div class="color-circle" style="background-color: #D8BFD8;"></div>
-                <div class="color-circle" style="background-color: #B0E0E6;"></div>
-                <div class="color-circle" style="background-color: #E6E6FA;"></div>
-                <div class="color-circle" style="background-color: #AFEEEE;"></div>
-            </div>
-        </div>
-    </section>
-
     <!-- Анкета гостя -->
-    <section class="form-section" id="form">
+    <section class="rsvp-section">
         <div class="container">
-            <h2 class="section-title">Подтвердите участие</h2>
-            <form id="guest-form" class="guest-form">
-                <div class="form-group">
-                    <input type="text" id="name" name="name" placeholder="Имя" required>
-                    <input type="text" id="surname" name="surname" placeholder="Фамилия" required>
+            <div class="section-header">
+                <h2>Подтвердите участие</h2>
+                <p class="section-subtitle">Пожалуйста, заполните форму до 1 сентября 2025</p>
+            </div>
+            
+            <form id="rsvp-form" class="rsvp-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="surname" name="surname" placeholder="Ваша фамилия" required>
+                    </div>
                 </div>
-
+                
                 <div class="form-group">
-                    <label>Буду:</label>
+                    <label>Буду присутствовать:</label>
                     <div class="radio-group">
-                        <label class="radio-label">
+                        <label class="radio-option">
                             <input type="radio" name="attendance" value="alone" checked>
-                            <span>один/одна</span>
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">Один/одна</span>
                         </label>
-                        <label class="radio-label">
-                            <input type="radio" name="attendance" value="couple">
-                            <span>с парой / семьёй</span>
+                        <label class="radio-option">
+                            <input type="radio" name="attendance" value="with_partner">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">С парой</span>
                         </label>
-                        <label class="radio-label">
+                        <label class="radio-option">
                             <input type="radio" name="attendance" value="decline">
-                            <span>не смогу прийти</span>
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">Не смогу прийти</span>
                         </label>
                     </div>
                 </div>
-
-                <div class="form-group" id="companion-field" style="display: none;">
-                    <textarea id="companion" name="companion" placeholder="Имена тех, с кем планируете прийти"></textarea>
+                
+                <div class="form-group" id="partner-field" style="display: none;">
+                    <input type="text" id="partner_name" name="partner_name" placeholder="Имя вашего спутника">
                 </div>
-
+                
                 <div class="form-group">
-                    <label>Предпочтения в напитках:</label>
-                    <textarea id="drinks" name="drinks" placeholder="Ваши пожелания"></textarea>
+                    <label>Пожелания и комментарии:</label>
+                    <textarea id="wishes" name="wishes" placeholder="Ваши пожелания, аллергии, предпочтения в напитках..."></textarea>
                 </div>
-
-                <div class="form-group">
-                    <label>Аллергии / непереносимости:</label>
-                    <textarea id="allergies" name="allergies" placeholder="Укажите, если есть"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label>Выбор горячего блюда:</label>
-                    <div class="checkbox-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="food" value="chicken">
-                            <span>курица</span>
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="food" value="fish">
-                            <span>рыба</span>
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="food" value="pork">
-                            <span>свинина</span>
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="food" value="other">
-                            <span>своё</span>
-                        </div>
-                    <textarea id="food-other" name="food-other" placeholder="Укажите свой вариант" style="display: none;"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label>Как планируете добираться?</label>
-                    <select id="transport" name="transport">
-                        <option value="">Выберите вариант</option>
-                        <option value="car">На машине</option>
-                        <option value="taxi">Такси</option>
-                        <option value="public">Общественный транспорт</option>
-                        <option value="other">Другой вариант</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Нужна ли помощь с размещением/транспортом?</label>
-                    <textarea id="help" name="help" placeholder="Если нужна помощь, опишите, какая"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label>Комментарий / пожелания:</label>
-                    <textarea id="comment" name="comment" placeholder="Ваши пожелания или вопросы"></textarea>
-                </div>
-
-                <button type="submit" class="submit-btn">Отправить анкету</button>
+                
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Отправить ответ
+                </button>
             </form>
         </div>
     </section>
 
-    <!-- Чат гостей -->
-    <section class="chat-section" id="chat">
+    <!-- Контакты -->
+    <section class="contacts-section wave-section">
+        <div class="wave-top"></div>
         <div class="container">
-            <div class="chat-card">
-                <h2 class="section-title">Чат гостей</h2>
-                <p class="chat-text">Присоединяйтесь к общему чату гостей</p>
-                <a href="https://t.me/" target="_blank" class="chat-btn">
-                    <i class="fab fa-telegram"></i> Вступить в чат гостей
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Блок подарков -->
-    <section class="gifts-section" id="gifts">
-        <div class="container">
-            <div class="gifts-card">
-                <h2 class="section-title">Наше путешествие в новую жизнь</h2>
-                <p class="gifts-text">
-                    Мы начинаем самое большое путешествие — нашу семейную жизнь.
-                    Если вы захотите поддержать наш маршрут — мы будем очень благодарны ❤️
-                </p>
-                <div class="travel-icons">
-                    <i class="fas fa-plane"></i>
-                    <i class="fas fa-suitcase"></i>
-                    <i class="fas fa-map"></i>
-                    <i class="fas fa-heart"></i>
+            <div class="contacts-card">
+                <h2>По всем вопросам</h2>
+                <div class="contacts-info">
+                    <div class="contact-item">
+                        <i class="fas fa-user"></i>
+                        <div>
+                            <h4>Лора</h4>
+                            <p>+7 (XXX) XXX-XX-XX</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-user"></i>
+                        <div>
+                            <h4>Данила</h4>
+                            <p>+7 (XXX) XXX-XX-XX</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="telegram-link">
+                    <a href="https://t.me/" target="_blank" class="tg-btn">
+                        <i class="fab fa-telegram"></i> Чат гостей в Telegram
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Финальный блок -->
-    <section class="final-section" id="final">
+    <!-- Финальное сообщение -->
+    <section class="final-section">
         <div class="container">
-            <div class="final-content">
-                <h2 class="final-title">С любовью,</h2>
-                <div class="final-names">
-                    <p class="bride-name">Кристалина</p>
-                    <p class="ampersand">&</p>
-                    <p class="groom-name">Александр</p>
-                </div>
-                <div class="final-date">8 февраля 2026</div>
+            <div class="final-message">
+                <h2>Ждем вас на нашем празднике!</h2>
+                <p class="signature">С любовью,<br>Лора и Данила</p>
+                <div class="final-date">27.09.2025</div>
             </div>
         </div>
     </section>
@@ -377,12 +410,12 @@
     <!-- Футер -->
     <footer class="footer">
         <div class="container">
-            <p>© 2026 Кристалина & Александр. Все права защищены.</p>
-            <p class="footer-note">Создано с ❤️ для нашего особенного дня</p>
+            <p>Создано с <i class="fas fa-heart"></i> для нашего особенного дня</p>
+            <p class="copyright">© 2025 Лора & Данила</p>
         </div>
     </footer>
 
-    <script src="swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
