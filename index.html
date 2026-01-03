@@ -27,6 +27,8 @@
             --dark-text: #333333;
             --text-light: #666666;
             --overlay-bg: rgba(245, 245, 245, 0.9);
+            --red-heart: #ff6b6b;
+            --romantic-pink: #FFE4E8;
         }
 
         html {
@@ -42,7 +44,7 @@
             position: relative;
         }
 
-        /* Основной фон с параллаксом */
+        /* Основной фон с параллаксом - ИСПОЛЬЗУЕМ ВАШЕ ФОТО */
         body::before {
             content: '';
             position: fixed;
@@ -50,7 +52,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1511988617509-a57c8a288659?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');
+            background-image: url('assets/images/nvitation-bg.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -138,7 +140,7 @@
             text-align: center;
             padding: 20px;
             background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
-                        url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80') center/cover no-repeat;
+                        url('assets/images/proposal-bg.jpg') center/cover no-repeat;
             z-index: 1;
         }
 
@@ -319,15 +321,18 @@
             margin-top: 3rem;
         }
 
-        .heart-decoration i {
-            color: var(--primary-lilac);
+        /* ВСЕ СЕРДЕЧКИ КРАСНЫЕ */
+        .heart-decoration i,
+        .heart-pulse,
+        .fa-heart {
+            color: var(--red-heart) !important;
             font-size: 1.5rem;
-            opacity: 0.7;
+            opacity: 0.9;
             animation: gentlePulse 3s infinite;
         }
 
         @keyframes gentlePulse {
-            0%, 100% { transform: scale(1); opacity: 0.7; }
+            0%, 100% { transform: scale(1); opacity: 0.9; }
             50% { transform: scale(1.1); opacity: 1; }
         }
 
@@ -555,21 +560,9 @@
             border-radius: 50%;
             border: 5px solid var(--pure-white);
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: var(--primary-lilac);
-            background: linear-gradient(135deg, rgba(128, 207, 255, 0.1), rgba(193, 162, 232, 0.1));
-        }
-
-        /* Иконки для фото-заглушек */
-        .photo-kristalina::before {
-            content: "👸";
-        }
-
-        .photo-alexander::before {
-            content: "🤴";
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
         .child-photo h3 {
@@ -625,7 +618,7 @@
         }
 
         .heart-pulse {
-            color: var(--primary-lilac);
+            color: var(--red-heart);
             font-size: 2.5rem;
             animation: gentlePulse 2s infinite;
         }
@@ -899,7 +892,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://images.unsplash.com/photo-1511988617509-a57c8a288659?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80') center/cover fixed;
+            background: url('assets/images/nvitation-bg.jpg') center/cover fixed;
             opacity: 0.1;
             z-index: 0;
         }
@@ -1231,6 +1224,7 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
+            background: linear-gradient(rgba(255, 228, 232, 0.9), rgba(255, 228, 232, 0.95));
         }
 
         .final-section::before {
@@ -1260,27 +1254,31 @@
 
         .final-message h2 {
             font-family: 'Poppins', sans-serif;
-            font-size: 3.5rem;
+            font-size: 4rem; /* УВЕЛИЧЕННЫЙ РАЗМЕР */
             color: var(--dark-text);
             margin-bottom: 60px;
             font-weight: 500;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+            letter-spacing: 1px;
         }
 
         .signature {
-            font-size: 2.5rem;
+            font-size: 3rem; /* УВЕЛИЧЕННЫЙ РАЗМЕР */
             color: var(--primary-blue);
             margin: 50px 0;
             line-height: 1.4;
             font-family: 'Poppins', sans-serif;
             font-weight: 500;
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.6);
         }
 
         .final-date {
-            font-size: 2.5rem;
+            font-size: 3rem; /* УВЕЛИЧЕННЫЙ РАЗМЕР */
             color: var(--primary-lilac);
             letter-spacing: 3px;
             font-weight: 600;
             font-family: 'Poppins', sans-serif;
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.6);
         }
 
         /* ===== КНОПКА МУЗЫКИ ===== */
@@ -1335,6 +1333,14 @@
             
             .story-timeline::before {
                 left: 30px;
+            }
+            
+            .final-message h2 {
+                font-size: 3.2rem;
+            }
+            
+            .signature, .final-date {
+                font-size: 2.5rem;
             }
         }
 
@@ -1427,6 +1433,14 @@
             }
             
             .month {
+                font-size: 1.8rem;
+            }
+            
+            .final-message h2 {
+                font-size: 2.5rem;
+            }
+            
+            .signature, .final-date {
                 font-size: 1.8rem;
             }
         }
@@ -1535,8 +1549,8 @@
             <div class="childhood-content">
                 <div class="child-photo">
                     <div class="photo-frame">
-                        <div class="photo-inner kristalina"></div>
-                  </div>
+                        <div class="photo-inner" id="photo-kristalina"></div>
+                    </div>
                     <h3>Кристалина</h3>
                     <p>Всегда мечтала о настоящей любви</p>
                 </div>
@@ -1547,13 +1561,15 @@
                         <span class="plus">+</span>
                         <span>Александр</span>
                         <span class="equals">=</span>
-                        <span class="heart-pulse">🤍</span>
+                        <span class="heart-pulse">❤️</span>
                     </div>
                 </div>
                 
                 <div class="child-photo">
                     <div class="photo-frame">
-                        <div class=<div class="photo-inner alexander"></div>                    
+                        <div class="photo-inner" id="photo-alexander"></div>
+                    </div>
+                    <h3>Александр</h3>
                     <p>Нашел свою половинку</p>
                 </div>
             </div>
@@ -1783,6 +1799,7 @@
                         loading.style.display = 'none';
                         console.log('Сайт готов!');
                         initAnimations();
+                        loadLocalPhotos(); // Загружаем ваши фото
                     }, 500);
                 }
             }, 1000);
@@ -1809,6 +1826,64 @@
                 });
             });
         });
+
+        // ===== ЗАГРУЗКА ВАШИХ ФОТО =====
+        function loadLocalPhotos() {
+            console.log('📸 Загрузка ваших фотографий...');
+            
+            // Массив ваших фото
+            const photos = [
+                {
+                    id: 'photo-kristalina',
+                    url: 'assets/images/child-kristalina.jpg',
+                    fallback: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80'
+                },
+                {
+                    id: 'photo-alexander',
+                    url: 'assets/images/child-alexander.jpg',
+                    fallback: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80'
+                }
+            ];
+            
+            // Загружаем каждое фото
+            photos.forEach(photo => {
+                const img = new Image();
+                img.onload = function() {
+                    console.log(`✅ Ваше фото загружено: ${photo.url}`);
+                    const element = document.getElementById(photo.id);
+                    if (element) {
+                        element.style.backgroundImage = `url('${photo.url}')`;
+                    }
+                };
+                img.onerror = function() {
+                    console.log(`❌ Фото не найдено: ${photo.url}`);
+                    const element = document.getElementById(photo.id);
+                    if (element) {
+                        element.style.backgroundImage = `url('${photo.fallback}')`;
+                        console.log(`🖼️ Использована заглушка для: ${photo.id}`);
+                    }
+                };
+                img.src = photo.url;
+            });
+            
+            // Проверяем фоновые фото
+            const bgPhotos = [
+                'assets/images/proposal-bg.jpg',
+                'assets/images/nvitation-bg.jpg'
+            ];
+            
+            bgPhotos.forEach(path => {
+                const img = new Image();
+                img.onload = function() {
+                    console.log(`✅ Фоновое фото загружено: ${path}`);
+                };
+                img.onerror = function() {
+                    console.log(`❌ Фоновое фото не найдено: ${path}`);
+                    console.log('⚠️ Проверьте наличие файлов в папке assets/images/');
+                };
+                img.src = path;
+            });
+        }
 
         // ===== АНИМАЦИИ ПРИ СКРОЛЛЕ =====
         function initAnimations() {
@@ -1944,76 +2019,6 @@
         document.querySelector('.chat-btn').addEventListener('click', function() {
             alert('Чат гостей будет доступен ближе к дате свадьбы. Следите за обновлениями! 💌');
         });
-
-        // ===== ЗАГРУЗКА ФОТО =====
-        // Функция для загрузки фото с обработкой ошибок
-        function loadPhotos() {
-            // Массив путей к фото
-            const photoPaths = [
-                'assets/images/child-kristalina.jpg',
-                'assets/images/child-alexander.jpg',
-                'assets/images/nvitation-bg.jpg',
-                'assets/images/proposal-bg.jpg'
-            ];
-            
-            // Проверяем наличие фото
-            photoPaths.forEach(path => {
-                const img = new Image();
-                img.onload = function() {
-                    console.log(`✅ Фото загружено: ${path}`);
-                    
-                    // Если это детские фото, применяем их
-                    if (path.includes('child-kristalina')) {
-                        const kristalinaPhoto = document.querySelector('.photo-kristalina');
-                        if (kristalinaPhoto) {
-                            kristalinaPhoto.style.backgroundImage = `url('${path}')`;
-                            kristalinaPhoto.style.backgroundSize = 'cover';
-                            kristalinaPhoto.style.backgroundPosition = 'center';
-                            kristalinaPhoto.innerHTML = '';
-                        }
-                    }
-                    
-                    if (path.includes('child-alexander')) {
-                        const alexanderPhoto = document.querySelector('.photo-alexander');
-                        if (alexanderPhoto) {
-                            alexanderPhoto.style.backgroundImage = `url('${path}')`;
-                            alexanderPhoto.style.backgroundSize = 'cover';
-                            alexanderPhoto.style.backgroundPosition = 'center';
-                            alexanderPhoto.innerHTML = '';
-                        }
-                    }
-                };
-                
-                img.onerror = function() {
-                    console.log(`❌ Фото не найдено: ${path}`);
-                    // Используем заглушки из Unsplash
-                    if (path.includes('child-kristalina')) {
-                        const kristalinaPhoto = document.querySelector('.photo-kristalina');
-                        if (kristalinaPhoto) {
-                            kristalinaPhoto.style.backgroundImage = 'url("https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80")';
-                            kristalinaPhoto.style.backgroundSize = 'cover';
-                            kristalinaPhoto.style.backgroundPosition = 'center';
-                            kristalinaPhoto.innerHTML = '';
-                        }
-                    }
-                    
-                    if (path.includes('child-alexander')) {
-                        const alexanderPhoto = document.querySelector('.photo-alexander');
-                        if (alexanderPhoto) {
-                            alexanderPhoto.style.backgroundImage = 'url("https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80")';
-                            alexanderPhoto.style.backgroundSize = 'cover';
-                            alexanderPhoto.style.backgroundPosition = 'center';
-                            alexanderPhoto.innerHTML = '';
-                        }
-                    }
-                };
-                
-                img.src = path;
-            });
-        }
-        
-        // Загружаем фото после полной загрузки страницы
-        window.addEventListener('load', loadPhotos);
     </script>
 </body>
 </html>
