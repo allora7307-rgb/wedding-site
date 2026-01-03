@@ -438,9 +438,8 @@ position: relative;
 }
 
 #photo-alexander {
-    background-image: url('Assets/Image/child-groom.jpg');
+ background-image: url('Assets.mh/Image/child-groom.jpg');
 }
-
 /* Текст под фото */
 .child-photo h3 {
     font-family: 'Cormorant Garamond', serif;
