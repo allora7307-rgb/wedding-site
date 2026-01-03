@@ -159,9 +159,9 @@ body {
 }
 
 /* ===== ПРИГЛАСИТЕЛЬНЫЙ БЛОК ===== */
-.welcome-section {
-    padding: 120px 0 80px;
-    position: relative;
+.welcome-section ( 
+padding: 120px 0 80px;  
+position: relative;
     background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
                 url('assets/images/invitation-bg.jpg') center/cover fixed;
 }
@@ -257,7 +257,23 @@ body {
 .heart-decoration i:nth-child(3) {
     animation-delay: 1s;
 }
+/* ===== ОСНОВНОЙ ФОН СЕКЦИИ ===== */
+.main-section { /* <-- замени на класс реальной секции, например .welcome-section */
+    background-image: url('Assets/Image/invitation-bg.jpg');
+    background-size: cover;       /* фон полностью покрывает секцию */
+    background-position: center;  /* центрируем картинку */
+    background-repeat: no-repeat;
+    min-height: 600px;            /* минимальная высота */
+}
 
+/* Мобильная версия */
+@media (max-width: 768px) {
+    .main-section {
+        background-size: cover;
+        background-position: top center; /* чтобы главное было видно сверху */
+        min-height: 400px;               /* высоту можно подкорректировать */
+    }
+}
 /* ===== ИСТОРИЯ ===== */
 .story-section {
     padding: 100px 0;
