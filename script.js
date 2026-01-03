@@ -1,203 +1,202 @@
+// ===== ЗАГРУЗКА САЙТА =====
 document.addEventListener('DOMContentLoaded', function() {
-    // Параллакс эффект
-    initParallax();
+    console.log('Свадебный сайт загружается...');
     
-    // Таймер обратного отсчета
-    initCountdown();
-    
-    // Обработка формы
-    initForm();
-    
-    // Управление музыкой
-    initMusic();
-    
-    // Анимация при скролле
-    initScrollAnimations();
-    
-    // Инициализация календаря
-    initMiniCalendar();
-});
-
-// Параллакс эффект для фона
-function initParallax() {
-    window.addEventListener('scroll', function() {
-        const scrolled = window.pageYOffset;
-        const parallaxBg = document.querySelector('.parallax-bg');
-        
-        if (parallaxBg) {
-            const rate = scrolled * 0.3;
-            parallaxBg.style.transform = `translate3d(0, ${rate}px, 0)`;
+    // Скрыть лоадер через 1 секунду
+    setTimeout(function() {
+        const loading = document.getElementById('loading');
+        if (loading) {
+            loading.style.opacity = '0';
+            setTimeout(() => {
+                loading.style.display = 'none';
+                console.log('Сайт загружен!');
+                
+                // Инициализация всех функций после загрузки
+                initCountdown();
+                initRSVPForm();
+                initMusicPlayer();
+                initScrollAnimations();
+            }, 500);
         }
-        
-        // Анимация самолетиков
-        const planes = document.querySelectorAll('.fas.fa-plane');
-        planes.forEach((plane, index) => {
-            const speed = 0.5 + (index * 0.1);
-            const yOffset = scrolled * speed * 0.1;
-            plane.style.transform = `translateY(${yOffset}px) rotate(${yOffset}deg)`;
+    }, 1000);
+    
+    // Плавный скролл для якорей
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
         });
     });
-}
+});
 
-// Таймер до свадьбы
+// ===== ТАЙМЕР ОБРАТНОГО ОТСЧЕТА =====
 function initCountdown() {
-    const weddingDate = new Date('2025-09-27T15:30:00').getTime();
+    console.log('Таймер инициализирован');
+    
+    const weddingDate = new Date('2026-02-08T18:00:00').getTime();
     
     function updateCountdown() {
         const now = new Date().getTime();
         const timeLeft = weddingDate - now;
         
+        // Если свадьба уже прошла
         if (timeLeft < 0) {
-            // Свадьба уже прошла
             document.getElementById('days').textContent = '000';
             document.getElementById('hours').textContent = '00';
             document.getElementById('minutes').textContent = '00';
             document.getElementById('seconds').textContent = '00';
+            
+            // Изменить заголовок
+            const title = document.querySelector('.countdown-section h2');
+            if (title) {
+                title.textContent = 'Свадьба состоялась!';
+            }
             return;
         }
         
+        // Расчет времени
         const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
         const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
         
-        // Анимация цифр
-        animateNumber('days', days, 3);
-        animateNumber('hours', hours, 2);
-        animateNumber('minutes', minutes, 2);
-        animateNumber('seconds', seconds, 2);
+        // Обновление с анимацией
+        updateNumberWithAnimation('days', days, 3);
+        updateNumberWithAnimation('hours', hours, 2);
+        updateNumberWithAnimation('minutes', minutes, 2);
+        updateNumberWithAnimation('seconds', seconds, 2);
     }
     
-    function animateNumber(elementId, value, digits) {
+    function updateNumberWithAnimation(elementId, value, digits) {
         const element = document.getElementById(elementId);
+        if (!element) return;
+        
         const currentValue = parseInt(element.textContent) || 0;
         
         if (currentValue !== value) {
+            // Анимация изменения
             element.style.transform = 'scale(1.2)';
-            element.style.color = '#FFFFFF';
+            element.style.opacity = '0.7';
             
             setTimeout(() => {
                 element.textContent = value.toString().padStart(digits, '0');
                 element.style.transform = 'scale(1)';
-                element.style.color = '';
+                element.style.opacity = '1';
             }, 150);
         }
     }
     
+    // Запуск таймера
     updateCountdown();
     setInterval(updateCountdown, 1000);
 }
 
-// Обработка формы
-function initForm() {
+// ===== АНКЕТА ГОСТЯ =====
+function initRSVPForm() {
+    console.log('Форма анкеты инициализирована');
+    
     const form = document.getElementById('rsvp-form');
+    if (!form) return;
+    
     const attendanceRadios = document.querySelectorAll('input[name="attendance"]');
     const partnerField = document.getElementById('partner-field');
     
-    // Показать/скрыть поле для имени спутника
+    // Показать/скрыть поле для имен спутников
     attendanceRadios.forEach(radio => {
         radio.addEventListener('change', function() {
-            if (this.value === 'with_partner') {
+            if (this.value === 'with_partner' && partnerField) {
                 partnerField.style.display = 'block';
-            } else {
+                partnerField.style.animation = 'fadeIn 0.5s ease-out';
+            } else if (partnerField) {
                 partnerField.style.display = 'none';
             }
         });
     });
     
-    // Отправка формы
+    // Обработка отправки формы
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         
+        // Сбор данных формы
         const formData = new FormData(this);
         const data = {};
         formData.forEach((value, key) => {
-            data[key] = value;
+            if (key === 'drinks') {
+                if (!data[key]) data[key] = [];
+                data[key].push(value);
+            } else {
+                data[key] = value;
+            }
         });
         
-        // Здесь будет отправка данных в Telegram или на сервер
-        // Временное решение - показываем сообщение
-        showNotification('Спасибо! Ваш ответ сохранен. Ждем вас на свадьбе! ❤️');
+        // Временное решение - сообщение об успехе
+        showNotification('🎉 Спасибо! Ваша анкета отправлена. Мы будем ждать вас на нашей свадьбе! ❤️');
         
         // Сброс формы
         form.reset();
-        partnerField.style.display = 'none';
+        if (partnerField) partnerField.style.display = 'none';
     });
 }
 
-// Управление музыкой
-function initMusic() {
+// ===== МУЗЫКАЛЬНЫЙ ПЛЕЕР =====
+function initMusicPlayer() {
+    console.log('Музыкальный плеер инициализирован');
+    
     const musicBtn = document.getElementById('music-toggle');
-    const musicIcon = musicBtn.querySelector('i');
-    const backgroundMusic = document.getElementById('background-music');
+    const musicIcon = musicBtn ? musicBtn.querySelector('i') : null;
+    
+    if (!musicBtn || !musicIcon) return;
     
     let isPlaying = false;
     
     musicBtn.addEventListener('click', function() {
         if (isPlaying) {
-            backgroundMusic.pause();
+            // Пауза
             musicIcon.className = 'fas fa-volume-mute';
-            musicBtn.style.transform = 'scale(1)';
+            showNotification('🔇 Музыка выключена');
         } else {
-            // Пытаемся воспроизвести
-            const playPromise = backgroundMusic.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    musicIcon.className = 'fas fa-volume-up';
-                    isPlaying = true;
-                    musicBtn.style.transform = 'scale(1.1)';
-                }).catch(error => {
-                    console.log('Автовоспроизведение заблокировано:', error);
-                    // Показываем сообщение, что нужно кликнуть еще раз
-                    musicBtn.innerHTML = '<i class="fas fa-play"></i>';
-                    musicBtn.style.animation = 'pulse 1s infinite';
-                    
-                    // Сбрасываем состояние через 3 секунды
-                    setTimeout(() => {
-                        musicBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
-                        musicBtn.style.animation = '';
-                    }, 3000);
-                });
-            }
+            // Воспроизведение
+            musicIcon.className = 'fas fa-volume-up';
+            showNotification('🎵 Музыка включена');
         }
         isPlaying = !isPlaying;
-    });
-    
-    // Автопауза при скролле (опционально)
-    let scrollTimer;
-    window.addEventListener('scroll', function() {
-        if (isPlaying) {
-            clearTimeout(scrollTimer);
-            backgroundMusic.volume = 0.3;
-            
-            scrollTimer = setTimeout(() => {
-                if (isPlaying) {
-                    backgroundMusic.volume = 1;
-                }
-            }, 500);
-        }
+        
+        // Анимация кнопки
+        this.style.transform = 'scale(1.1)';
+        setTimeout(() => {
+            this.style.transform = 'scale(1)';
+        }, 200);
     });
 }
 
-// Анимация при скролле
+// ===== АНИМАЦИИ ПРИ СКРОЛЛЕ =====
 function initScrollAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+    console.log('Анимации при скролле инициализированы');
     
+    // Создаем наблюдатель
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animated');
             }
         });
-    }, observerOptions);
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
     
-    // Наблюдаем за анимируемыми элементами
+    // Наблюдаем за элементами
     const animatedElements = document.querySelectorAll(
-        '.story-item, .program-item, .detail-card, .color-item, .contact-item'
+        '.story-item, .program-item, .detail-card, .contact-item, .child-photo, .love-equation'
     );
     
     animatedElements.forEach(element => {
@@ -207,38 +206,31 @@ function initScrollAnimations() {
     // Добавляем CSS для анимации
     const style = document.createElement('style');
     style.textContent = `
-        .animated {
-            animation: slideUp 0.8s ease-out forwards;
-        }
-        
-        @keyframes slideUp {
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(40px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
+        
+        .animated {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .animated:nth-child(2) { animation-delay: 0.1s; }
+        .animated:nth-child(3) { animation-delay: 0.2s; }
+        .animated:nth-child(4) { animation-delay: 0.3s; }
     `;
     document.head.appendChild(style);
 }
 
-// Мини-календарь
-function initMiniCalendar() {
-    const weddingDate = new Date(2025, 8, 27); // Сентябрь 27, 2025
-    const monthNames = [
-        'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
-        'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
-    ];
-    
-    // Можно добавить календарь позже, если нужно
-    console.log('Дата свадьбы:', weddingDate.toLocaleDateString());
-}
-
-// Всплывающее уведомление
+// ===== УВЕДОМЛЕНИЯ =====
 function showNotification(message) {
+    // Создаем уведомление
     const notification = document.createElement('div');
     notification.className = 'notification';
     notification.innerHTML = `
@@ -255,7 +247,7 @@ function showNotification(message) {
             position: fixed;
             top: 30px;
             right: 30px;
-            background: linear-gradient(135deg, var(--primary-blue), var(--primary-lilac));
+            background: linear-gradient(135deg, #87CEEB, #D8BFD8);
             color: white;
             padding: 20px 25px;
             border-radius: 15px;
@@ -263,6 +255,8 @@ function showNotification(message) {
             z-index: 10000;
             animation: slideInRight 0.5s ease-out, fadeOut 0.5s ease-out 3s forwards;
             max-width: 400px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
         }
         
         .notification-content {
@@ -273,6 +267,7 @@ function showNotification(message) {
         
         .notification i {
             font-size: 1.5rem;
+            flex-shrink: 0;
         }
         
         @keyframes slideInRight {
@@ -287,54 +282,49 @@ function showNotification(message) {
         }
         
         @keyframes fadeOut {
-            from {
-                opacity: 1;
-            }
             to {
                 opacity: 0;
                 visibility: hidden;
             }
         }
+        
+        @media (max-width: 768px) {
+            .notification {
+                top: 20px;
+                right: 20px;
+                left: 20px;
+                max-width: none;
+            }
+        }
     `;
     
+    // Добавляем на страницу
     document.head.appendChild(style);
     document.body.appendChild(notification);
     
-    // Удаляем уведомление через 3.5 секунды
+    // Удаляем через 3.5 секунды
     setTimeout(() => {
-        notification.remove();
-        style.remove();
+        if (notification.parentNode) {
+            notification.remove();
+        }
+        if (style.parentNode) {
+            style.remove();
+        }
     }, 3500);
 }
 
-// Добавление видео позже
-function addVideoLater(videoUrl) {
-    // Эта функция будет добавлена позже, когда у вас будет видео
-    const videoSection = `
-        <section class="video-section wave-section">
-            <div class="wave-top"></div>
-            <div class="container">
-                <div class="section-header">
-                    <h2>Наше видео</h2>
-                    <div class="plane-divider">
-                        <i class="fas fa-plane"></i>
-                        <div class="line"></div>
-                        <i class="fas fa-video"></i>
-                        <div class="line"></div>
-                        <i class="fas fa-plane"></i>
-                    </div>
-                </div>
-                <div class="video-container">
-                    <video controls playsinline preload="metadata">
-                        <source src="${videoUrl}" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
-                </div>
-            </div>
-        </section>
-    `;
+// ===== ПАРАЛЛАКС ЭФФЕКТ =====
+window.addEventListener('scroll', function() {
+    const scrolled = window.pageYOffset;
+    const parallaxElements = document.querySelectorAll('.parallax-bg, .hero-section');
     
-    // Вставить перед секцией таймера
-    const countdownSection = document.querySelector('.countdown-section');
-    countdownSection.insertAdjacentHTML('beforebegin', videoSection);
-}
+    parallaxElements.forEach(element => {
+        const speed = element.dataset.speed || 0.5;
+        element.style.transform = `translateY(${scrolled * speed}px)`;
+    });
+});
+
+// ===== ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ =====
+console.log('Свадебный сайт Кристалины и Александра');
+console.log('Дата свадьбы: 8 февраля 2026 года');
+console.log('Начало: 18:00');
