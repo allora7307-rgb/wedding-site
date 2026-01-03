@@ -35,7 +35,7 @@ body {
     padding: 0 20px;
 }
 
-/* ===== ЗАГРУЗОЧНЫЙ ЭКРАН ===== */
+/* ===== ЗАГРУЗКА ===== */
 #loading {
     position: fixed;
     top: 0;
@@ -181,7 +181,7 @@ body {
 }
 
 .welcome-card {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255,255,255,0.95);
     border-radius: 25px;
     padding: 60px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.1);
@@ -253,7 +253,7 @@ body {
     animation-delay: 1s;
 }
 
-/* ===== ФОТО КРИСТАЛИНА И АЛЕКСАНДР ===== */
+/* ===== ДЕТСКИЕ ФОТО ===== */
 .childhood-section {
     padding: 100px 0;
     background: white;
@@ -306,7 +306,7 @@ body {
     background-image: url('assets/images/child-groom.jpg');
 }
 
-/* ===== ФИНАЛЬНЫЙ БЛОК (Ждём вас на нашем празднике) ===== */
+/* ===== ФИНАЛЬНЫЙ БЛОК ===== */
 .final-section {
     padding: 120px 20px;
     text-align: center;
@@ -339,7 +339,7 @@ body {
     letter-spacing: 2px;
 }
 
-/* ===== МОБИЛЬНЫЕ ВЕРСИИ ===== */
+/* ===== МОБИЛЬНАЯ ВЕРСИЯ ===== */
 @media (max-width: 768px) {
     .child-photo .photo-frame {
         width: 220px;
