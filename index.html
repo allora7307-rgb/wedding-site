@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кристалина & Александр | Приглашение на свадьбу</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Музыка -->
+    <audio id="wedding-music" loop>
+        <source src="assets/music.mp3" type="audio/mp3">
+    </audio>
+    
+    <!-- Кнопка музыки -->
+    <button id="music-toggle" class="music-btn">
+        <i class="fas fa-music"></i>
+        <span>Включить музыку</span>
+    </button>
+
+    <!-- Блок 1: Герой -->
+    <section class="hero parallax-bg" id="hero">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1 class="hero-title">Кристалина & Александр</h1>
+                <p class="hero-subtitle">Приглашают вас на свадьбу</p>
+                <div class="hero-date">
+                    <span class="date-large">8 февраля 2026</span>
+                    <span class="time">18:00</span>
+                </div>
+                <div class="scroll-indicator">
+                    <i class="fas fa-plane"></i>
+                    <p>прокрутите вниз</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Таймер -->
+    <section class="countdown-section">
+        <div class="container">
+            <div class="countdown-content fade-in">
+                <h2 class="section-title">До свадьбы осталось</h2>
+                <div class="countdown-timer" id="countdown">
+                    <div class="time-unit">
+                        <span class="number" id="days">00</span>
+                        <span class="label">дней</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="number" id="hours">00</span>
+                        <span class="label">часов</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="number" id="minutes">00</span>
+                        <span class="label">минут</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="number" id="seconds">00</span>
+                        <span class="label">секунд</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
