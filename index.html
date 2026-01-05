@@ -1217,71 +1217,299 @@
             box-shadow: 0 15px 30px rgba(128, 207, 255, 0.3);
         }
 
-        /* ===== ФИНАЛЬНЫЙ БЛОК ===== */
-        .final-section {
-            padding: 120px 0;
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(rgba(255, 228, 232, 0.9), rgba(255, 228, 232, 0.95));
-        }
+  /* ===== ФИНАЛЬНЫЙ БЛОК С ВИДЕО ===== */
+.final-section {
+    padding: 0;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #000;
+}
 
-        .final-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(128, 207, 255, 0.1), rgba(193, 162, 232, 0.1));
-            z-index: 0;
-        }
+/* Видео на фоне */
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
 
-        .final-message {
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
+.video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7);
+    animation: fadeInVideo 2s ease-out forwards;
+}
 
-        .final-message.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+@keyframes fadeInVideo {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 
-        .final-message h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 4rem; /* УВЕЛИЧЕННЫЙ РАЗМЕР */
-            color: var(--dark-text);
-            margin-bottom: 60px;
-            font-weight: 500;
-            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
-            letter-spacing: 1px;
-        }
+/* Темный оверлей для лучшей читаемости текста */
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.4) 0%,
+        rgba(0, 0, 0, 0.3) 50%,
+        rgba(0, 0, 0, 0.4) 100%
+    );
+    z-index: 1;
+}
 
-        .signature {
-            font-size: 3rem; /* УВЕЛИЧЕННЫЙ РАЗМЕР */
-            color: var(--primary-blue);
-            margin: 50px 0;
-            line-height: 1.4;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 500;
-            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.6);
-        }
+/* Контент поверх видео */
+.final-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    padding: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease-out;
+}
 
-        .final-date {
-            font-size: 3rem; /* УВЕЛИЧЕННЫЙ РАЗМЕР */
-            color: var(--primary-lilac);
-            letter-spacing: 3px;
-            font-weight: 600;
-            font-family: 'Poppins', sans-serif;
-            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.6);
-        }
+.final-content.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 
-        /* ===== КНОПКА МУЗЫКИ ===== */
+/* Главная надпись */
+.final-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 4.5rem;
+    font-weight: 300;
+    margin-bottom: 60px;
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+    line-height: 1.2;
+    animation: textGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+    from {
+        text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5),
+                     0 0 20px rgba(255, 255, 255, 0.1);
+    }
+    to {
+        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6),
+                     0 0 30px rgba(255, 255, 255, 0.2),
+                     0 0 40px rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Подпись */
+.final-signature {
+    font-family: 'Poppins', sans-serif;
+    font-size: 3.2rem;
+    font-weight: 300;
+    margin: 70px 0 40px;
+    opacity: 0.95;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+    padding: 20px 40px;
+}
+
+/* Эффект подчеркивания для подписи */
+.final-signature::before,
+.final-signature::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.6) 20%, 
+        rgba(255, 255, 255, 0.8) 50%, 
+        rgba(255, 255, 255, 0.6) 80%, 
+        transparent 100%);
+    opacity: 0.7;
+}
+
+.final-signature::before {
+    top: 0;
+    animation: lineExpand 2s ease-out;
+}
+
+.final-signature::after {
+    bottom: 0;
+    animation: lineExpand 2s ease-out 0.3s;
+}
+
+@keyframes lineExpand {
+    from { width: 0; opacity: 0; }
+    to { width: 100%; opacity: 0.7; }
+}
+
+/* Дата */
+.final-date {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    letter-spacing: 8px;
+    margin-top: 50px;
+    opacity: 0.9;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    padding: 25px 50px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: gentlePulse 4s ease-in-out infinite;
+}
+
+@keyframes gentlePulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    50% { 
+        transform: scale(1.02);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Декоративные элементы */
+.hearts-decoration {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 50px 0;
+    opacity: 0;
+    animation: fadeInHearts 1s ease-out 1s forwards;
+}
+
+@keyframes fadeInHearts {
+    to { opacity: 0.7; }
+}
+
+.heart-icon {
+    font-size: 2rem;
+    color: var(--red-heart);
+    animation: heartbeat 1.5s ease-in-out infinite;
+    opacity: 0.8;
+}
+
+.heart-icon:nth-child(2) { animation-delay: 0.3s; }
+.heart-icon:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* Запасной фон если видео не загрузится */
+.final-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        rgba(128, 207, 255, 0.2), 
+        rgba(193, 162, 232, 0.2),
+        rgba(255, 228, 232, 0.3));
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.video-error .final-section::before {
+    opacity: 1;
+}
+
+/* Адаптивность */
+@media (max-width: 992px) {
+    .final-title {
+        font-size: 3.5rem;
+        margin-bottom: 40px;
+    }
+    
+    .final-signature {
+        font-size: 2.5rem;
+        margin: 50px 0 30px;
+        padding: 15px 30px;
+    }
+    
+    .final-date {
+        font-size: 2.2rem;
+        letter-spacing: 6px;
+        padding: 20px 40px;
+    }
+    
+    .hearts-decoration {
+        margin: 40px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .final-title {
+        font-size: 2.8rem;
+        margin-bottom: 30px;
+        letter-spacing: 1px;
+    }
+    
+    .final-signature {
+        font-size: 2rem;
+        margin: 40px 0 25px;
+        padding: 10px 20px;
+    }
+    
+    .final-date {
+        font-size: 1.8rem;
+        letter-spacing: 4px;
+        padding: 15px 30px;
+    }
+    
+    .heart-icon {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .final-content {
+        padding: 20px;
+    }
+    
+    .final-title {
+        font-size: 2.2rem;
+        line-height: 1.3;
+    }
+    
+    .final-signature {
+        font-size: 1.6rem;
+        padding: 8px 15px;
+    }
+    
+    .final-date {
+        font-size: 1.4rem;
+        letter-spacing: 3px;
+        padding: 12px 20px;
+    }
+    
+    .hearts-decoration {
+        gap: 15px;
+    }
+}        /* ===== КНОПКА МУЗЫКИ ===== */
         .music-btn {
             position: fixed;
             bottom: 30px;
