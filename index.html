@@ -2322,7 +2322,8 @@
         });
     }
   
- </script>
+
+</script>
 
 <style>
 /* САМЫЕ ВАЖНЫЕ ФИКСЫ ДЛЯ ТЕЛЕФОНА */
@@ -2335,8 +2336,8 @@
     
     /* ЯРЧЕ ФОТО + ИСПРАВЛЕНИЕ ДЛЯ iOS */
     body::before { 
-        filter: brightness(1.1) !important; /* Чуть ярче чем на компьютере */
-        background-position: center top !important; /* Лучше для вертикальных экранов */
+        filter: brightness(1.1) !important;
+        background-position: center top !important;
         -webkit-backface-visibility: hidden;
         -webkit-transform: translateZ(0);
     }
@@ -2349,7 +2350,7 @@
     .rsvp-section::before,
     .chat-section::before,
     .childhood-section::before {
-        background: rgba(245, 245, 245, 0.5) !important; /* Ещё прозрачнее */
+        background: rgba(245, 245, 245, 0.5) !important;
         backdrop-filter: blur(1px) !important;
     }
     
@@ -2383,7 +2384,7 @@
     .welcome-card {
         margin: 0 10px !important;
         max-width: calc(100vw - 20px) !important;
-        background: rgba(255, 255, 255, 0.85) !important; /* 85% прозрачности */
+        background: rgba(255, 255, 255, 0.85) !important;
     }
     
     .details-grid {
@@ -2409,42 +2410,6 @@
         background: rgba(255, 255, 255, 0.95) !important;
     }
     
-    .childhood-content {
-        flex-direction: column !important;
-        gap: 30px !important;
-    }
-    
-    .photo-frame {
-        width: 250px !important;
-        height: 250px !important;
-        margin: 0 auto 20px !important;
-    }
-}
-</style>  
-    /* ← ВОТ ЭТО САМОЕ ВАЖНОЕ! */
-    .details-grid {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 20px !important;
-    }
-    
-    .detail-card {
-        width: 100% !important;
-        margin: 0 !important;
-    }
-    
-    /* Для истории на телефоне */
-    .story-item {
-        flex-direction: column !important;
-        margin-bottom: 100px !important;
-    }
-    
-    .story-content {
-        width: 100% !important;
-        margin: 100px 0 0 0 !important;
-    }
-    
-    /* Для блока "Кристалина + Александр" */
     .childhood-content {
         flex-direction: column !important;
         gap: 30px !important;
