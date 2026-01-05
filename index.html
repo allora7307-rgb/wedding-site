@@ -2327,9 +2327,36 @@
 <style>
 /* САМЫЕ ВАЖНЫЕ ФИКСЫ ДЛЯ ТЕЛЕФОНА */
 @media (max-width: 768px) {
-      body::after { background: rgba(255, 255, 255, 0.05) !important; }
-    body::before { filter: brightness(0.9) !important; }
+    /* УБРАТЬ БЕЛУЮ МАСКУ НА ТЕЛЕФОНЕ */
+    body::after { 
+        background: none !important; 
+        display: none !important; 
+    }
+    
+    /* ЯРЧЕ ФОТО */
+    body::before { 
+        filter: brightness(1) !important; 
+        background-attachment: scroll !important; /* Отключить параллакс на телефоне */
+    }
+    
+    /* УБРАТЬ БЕЛЫЙ ФОН В СЕКЦИЯХ */
+    .welcome-section::before,
+    .story-section::before,
+    .details-section::before,
+    .program-section::before,
+    .rsvp-section::before,
+    .chat-section::before,
+    .childhood-section::before {
+        background: rgba(245, 245, 245, 0.6) !important; /* Более прозрачный */
+        backdrop-filter: blur(2px) !important;
+    }
+    
     html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+    }
+        html, body {
         overflow-x: hidden !important;
         width: 100% !important;
         max-width: 100vw !important;
