@@ -100,13 +100,13 @@ function initPhotoLoading() {
         if (loadedPhotos === totalPhotos) {
             console.log('✅ Все фотографии проверены');
             // Показываем уведомление если есть ошибки
-            const failedPhotos = document.querySelectorAll('[data-photo-error="true"]');
-            if (failedPhotos.length > 0) {
-                console.log(`⚠️ ${failedPhotos.length} фото не загрузились, используются заглушки`);
-            }
+            const photoPaths = [
+    '/assets/images/proposal-bg.jpg',      // верхнее фото
+    '/assets/images/invitation-bg.jpg',    // фото фона
+    '/assets/images/child-bride.jpg',      // Кристалина (используйте правильное имя)
+    '/assets/images/child-groom.jpg'       // Александр (используйте правильное имя)
+];
         }
-    });
-}
 
 // Применение фотографий на сайт
 function applyPhoto(path, status) {
@@ -132,41 +132,41 @@ function applyPhoto(path, status) {
         }
     }
     
-    // Фото Кристалины
-    if (path.includes('child-kristalina')) {
-        const kristalinaPhoto = document.querySelector('.photo-inner.kristalina, [data-photo="kristalina"]');
-        if (kristalinaPhoto) {
-            if (status === 'success') {
-                kristalinaPhoto.style.backgroundImage = `url('${path}')`;
-                kristalinaPhoto.style.backgroundSize = 'cover';
-                kristalinaPhoto.style.backgroundPosition = 'center';
-            } else {
-                kristalinaPhoto.style.backgroundImage = "url('https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80')";
-                kristalinaPhoto.style.backgroundSize = 'cover';
-                kristalinaPhoto.style.backgroundPosition = 'center';
-                kristalinaPhoto.setAttribute('data-photo-error', 'true');
-            }
-        }
-    }
-    
-    // Фото Александра
-    if (path.includes('child-alexander')) {
-        const alexanderPhoto = document.querySelector('.photo-inner.alexander, [data-photo="alexander"]');
-        if (alexanderPhoto) {
-            if (status === 'success') {
-                alexanderPhoto.style.backgroundImage = `url('${path}')`;
-                alexanderPhoto.style.backgroundSize = 'cover';
-                alexanderPhoto.style.backgroundPosition = 'center';
-            } else {
-                alexanderPhoto.style.backgroundImage = "url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80')";
-                alexanderPhoto.style.backgroundSize = 'cover';
-                alexanderPhoto.style.backgroundPosition = 'center';
-                alexanderPhoto.setAttribute('data-photo-error', 'true');
-            }
+   // Фото Кристалины
+if (path.includes('child-kristalina') || path.includes('child-bride')) {
+    const kristalinaPhoto = document.getElementById('photo-kristalina');
+    if (kristalinaPhoto) {
+        if (status === 'success') {
+            kristalinaPhoto.style.backgroundImage = `url('${path}')`;
+            kristalinaPhoto.style.backgroundSize = 'cover';
+            kristalinaPhoto.style.backgroundPosition = 'center';
+            console.log('✅ Фото Кристалины установлено');
+        } else {
+            kristalinaPhoto.style.backgroundImage = "url('https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80')";
+            kristalinaPhoto.style.backgroundSize = 'cover';
+            kristalinaPhoto.style.backgroundPosition = 'center';
+            console.log('⚠️ Для Кристалины использована заглушка');
         }
     }
 }
 
+// Фото Александра
+if (path.includes('child-alexander') || path.includes('child-groom')) {
+    const alexanderPhoto = document.getElementById('photo-alexander');
+    if (alexanderPhoto) {
+        if (status === 'success') {
+            alexanderPhoto.style.backgroundImage = `url('${path}')`;
+            alexanderPhoto.style.backgroundSize = 'cover';
+            alexanderPhoto.style.backgroundPosition = 'center';
+            console.log('✅ Фото Александра установлено');
+        } else {
+            alexanderPhoto.style.backgroundImage = "url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80')";
+            alexanderPhoto.style.backgroundSize = 'cover';
+            alexanderPhoto.style.backgroundPosition = 'center';
+            console.log('⚠️ Для Александра использована заглушка');
+        }
+    }
+}
 // ===== ТАЙМЕР ОБРАТНОГО ОТСЧЕТА =====
 function initCountdown() {
     console.log('⏳ Инициализация таймера...');
