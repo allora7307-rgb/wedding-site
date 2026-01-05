@@ -194,9 +194,12 @@ body {
     background-size: cover;
     background-position: center;
     border: 6px solid white;
+    background-color: #f0f0f0; /* Фон по умолчанию */
 }
 
-/* ФОТО ДЛЯ КРИСТАЛИНЫ И АЛЕКСАНДРА */
+/* ВАЖНО: УБЕРИТЕ ЭТИ СТРОКИ ИЛИ ЗАКОММЕНТИРУЙТЕ ИХ! */
+/* Они переопределяют то, что делает JavaScript */
+/*
 #photo-kristalina {
     background-image: url('/assets/images/child-kristalina.jpg');
 }
@@ -204,6 +207,7 @@ body {
 #photo-alexander {
     background-image: url('/assets/images/child-alexander.jpg');
 }
+*/
 
 .child-photo h3 {
     font-family: 'Cormorant Garamond', serif;
@@ -283,12 +287,6 @@ body {
     .photo-frame {
         width: 220px;
         height: 220px;
-    }
-    
-    #photo-kristalina,
-    #photo-alexander {
-        background-size: cover;
-        background-position: center;
     }
     
     .final-message h2 {
