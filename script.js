@@ -65,8 +65,8 @@ function initPhotoLoading() {
     const photoPaths = [
         '/assets/images/proposal-bg.jpg',
         '/assets/images/invitation-bg.jpg',
-        '/assets/images/child-kristalina.jpg',
-        '/assets/images/child-alexander.jpg'
+        '/assets/images/child-bride.jpg,
+        '/assets/images/child-groom.jpg'
     ];
     
     let loadedPhotos = 0;
@@ -133,7 +133,7 @@ function applyPhoto(path, status) {
     }
     
    // Фото Кристалины
-if (path.includes('child-kristalina') || path.includes('child-bride')) {
+if (path.includes('child-bride) || path.includes('child-bride')) {
     const kristalinaPhoto = document.getElementById('photo-kristalina');
     if (kristalinaPhoto) {
         if (status === 'success') {
@@ -145,13 +145,13 @@ if (path.includes('child-kristalina') || path.includes('child-bride')) {
             kristalinaPhoto.style.backgroundImage = "url('https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80')";
             kristalinaPhoto.style.backgroundSize = 'cover';
             kristalinaPhoto.style.backgroundPosition = 'center';
-            console.log('⚠️ Для Кристалины использована заглушка');
+            console.log('child-bride.jpg);
         }
     }
 }
 
 // Фото Александра
-if (path.includes('child-alexander') || path.includes('child-groom')) {
+if (path.includes('child-groom) || path.includes('child-groom')) {
     const alexanderPhoto = document.getElementById('photo-alexander');
     if (alexanderPhoto) {
         if (status === 'success') {
@@ -163,7 +163,7 @@ if (path.includes('child-alexander') || path.includes('child-groom')) {
             alexanderPhoto.style.backgroundImage = "url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80')";
             alexanderPhoto.style.backgroundSize = 'cover';
             alexanderPhoto.style.backgroundPosition = 'center';
-            console.log('⚠️ Для Александра использована заглушка');
+            console.log('child-groom.jpg;
         }
     }
 }
