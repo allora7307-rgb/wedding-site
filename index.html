@@ -1971,13 +1971,15 @@
     <!-- Финальный блок с видео -->
     <section class="final-section" id="final">
         <!-- Видео на фоне -->
-        <div class="video-background">
-            <video autoplay muted loop playsinline>
-                <source src="assets/images/video/wedding-video.webm.mp4" type="video/mp4">
-            </video>
-        </div>
-        
-        <!-- Затемнение для читаемости текста -->
+       <div class="video-background">
+    <video autoplay muted loop playsinline id="bg-video">
+        <!-- Используем несколько форматов для совместимости -->
+        <source src="assets/videos/wedding-video.mp4" type="video/mp4">
+        <source src="assets/videos/wedding-video.webm" type="video/webm">
+        <!-- Запасное изображение если видео не загрузится -->
+        <img src="assets/images/nvitation-bg.jpg" alt="Фоновое изображение">
+    </video>
+</div>        <!-- Затемнение для читаемости текста -->
         <div class="video-overlay"></div>
         
         <!-- Контент поверх видео -->
