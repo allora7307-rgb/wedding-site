@@ -563,6 +563,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            background-color: #f0f0f0;
         }
 
         .child-photo h3 {
@@ -1217,299 +1218,227 @@
             box-shadow: 0 15px 30px rgba(128, 207, 255, 0.3);
         }
 
-  /* ===== ФИНАЛЬНЫЙ БЛОК С ВИДЕО ===== */
-.final-section {
-    padding: 0;
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    background: #000;
-}
+        /* ===== ФИНАЛЬНЫЙ БЛОК С ВИДЕО ===== */
+        .final-section {
+            padding: 0;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #000;
+        }
 
-/* Видео на фоне */
-.video-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    overflow: hidden;
-}
+        /* Видео на фоне */
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
 
-.video-background video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.7);
-    animation: fadeInVideo 2s ease-out forwards;
-}
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+            animation: fadeInVideo 2s ease-out forwards;
+        }
 
-@keyframes fadeInVideo {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
+        @keyframes fadeInVideo {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
-/* Темный оверлей для лучшей читаемости текста */
-.video-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.4) 0%,
-        rgba(0, 0, 0, 0.3) 50%,
-        rgba(0, 0, 0, 0.4) 100%
-    );
-    z-index: 1;
-}
+        /* Темный оверлей для лучшей читаемости текста */
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.4) 0%,
+                rgba(0, 0, 0, 0.3) 50%,
+                rgba(0, 0, 0, 0.4) 100%
+            );
+            z-index: 1;
+        }
 
-/* Контент поверх видео */
-.final-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    color: white;
-    padding: 40px;
-    max-width: 900px;
-    margin: 0 auto;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 1s ease-out;
-}
+        /* Контент поверх видео */
+        .final-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
 
-.final-content.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
+        .final-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-/* Главная надпись */
-.final-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 4.5rem;
-    font-weight: 300;
-    margin-bottom: 60px;
-    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
-    letter-spacing: 2px;
-    line-height: 1.2;
-    animation: textGlow 3s ease-in-out infinite alternate;
-}
+        /* Главная надпись */
+        .final-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 300;
+            margin-bottom: 60px;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
+            line-height: 1.2;
+            animation: textGlow 3s ease-in-out infinite alternate;
+        }
 
-@keyframes textGlow {
-    from {
-        text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5),
-                     0 0 20px rgba(255, 255, 255, 0.1);
-    }
-    to {
-        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6),
-                     0 0 30px rgba(255, 255, 255, 0.2),
-                     0 0 40px rgba(255, 255, 255, 0.1);
-    }
-}
+        @keyframes textGlow {
+            from {
+                text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5),
+                             0 0 20px rgba(255, 255, 255, 0.1);
+            }
+            to {
+                text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6),
+                             0 0 30px rgba(255, 255, 255, 0.2),
+                             0 0 40px rgba(255, 255, 255, 0.1);
+            }
+        }
 
-/* Подпись */
-.final-signature {
-    font-family: 'Poppins', sans-serif;
-    font-size: 3.2rem;
-    font-weight: 300;
-    margin: 70px 0 40px;
-    opacity: 0.95;
-    letter-spacing: 1px;
-    position: relative;
-    display: inline-block;
-    padding: 20px 40px;
-}
+        /* Подпись */
+        .final-signature {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 300;
+            margin: 70px 0 40px;
+            opacity: 0.95;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+            padding: 20px 40px;
+        }
 
-/* Эффект подчеркивания для подписи */
-.final-signature::before,
-.final-signature::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(90deg, 
-        transparent 0%, 
-        rgba(255, 255, 255, 0.6) 20%, 
-        rgba(255, 255, 255, 0.8) 50%, 
-        rgba(255, 255, 255, 0.6) 80%, 
-        transparent 100%);
-    opacity: 0.7;
-}
+        /* Эффект подчеркивания для подписи */
+        .final-signature::before,
+        .final-signature::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 255, 255, 0.6) 20%, 
+                rgba(255, 255, 255, 0.8) 50%, 
+                rgba(255, 255, 255, 0.6) 80%, 
+                transparent 100%);
+            opacity: 0.7;
+        }
 
-.final-signature::before {
-    top: 0;
-    animation: lineExpand 2s ease-out;
-}
+        .final-signature::before {
+            top: 0;
+            animation: lineExpand 2s ease-out;
+        }
 
-.final-signature::after {
-    bottom: 0;
-    animation: lineExpand 2s ease-out 0.3s;
-}
+        .final-signature::after {
+            bottom: 0;
+            animation: lineExpand 2s ease-out 0.3s;
+        }
 
-@keyframes lineExpand {
-    from { width: 0; opacity: 0; }
-    to { width: 100%; opacity: 0.7; }
-}
+        @keyframes lineExpand {
+            from { width: 0; opacity: 0; }
+            to { width: 100%; opacity: 0.7; }
+        }
 
-/* Дата */
-.final-date {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2.8rem;
-    font-weight: 300;
-    letter-spacing: 8px;
-    margin-top: 50px;
-    opacity: 0.9;
-    text-transform: uppercase;
-    position: relative;
-    display: inline-block;
-    padding: 25px 50px;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    animation: gentlePulse 4s ease-in-out infinite;
-}
+        /* Дата */
+        .final-date {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 300;
+            letter-spacing: 8px;
+            margin-top: 50px;
+            opacity: 0.9;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            padding: 25px 50px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: gentlePulse 4s ease-in-out infinite;
+        }
 
-@keyframes gentlePulse {
-    0%, 100% { 
-        transform: scale(1);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    }
-    50% { 
-        transform: scale(1.02);
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-    }
-}
+        @keyframes gentlePulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            }
+            50% { 
+                transform: scale(1.02);
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            }
+        }
 
-/* Декоративные элементы */
-.hearts-decoration {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin: 50px 0;
-    opacity: 0;
-    animation: fadeInHearts 1s ease-out 1s forwards;
-}
+        /* Декоративные элементы */
+        .hearts-decoration {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 50px 0;
+            opacity: 0;
+            animation: fadeInHearts 1s ease-out 1s forwards;
+        }
 
-@keyframes fadeInHearts {
-    to { opacity: 0.7; }
-}
+        @keyframes fadeInHearts {
+            to { opacity: 0.7; }
+        }
 
-.heart-icon {
-    font-size: 2rem;
-    color: var(--red-heart);
-    animation: heartbeat 1.5s ease-in-out infinite;
-    opacity: 0.8;
-}
+        .heart-icon {
+            font-size: 2rem;
+            color: var(--red-heart);
+            animation: heartbeat 1.5s ease-in-out infinite;
+            opacity: 0.8;
+        }
 
-.heart-icon:nth-child(2) { animation-delay: 0.3s; }
-.heart-icon:nth-child(3) { animation-delay: 0.6s; }
+        .heart-icon:nth-child(2) { animation-delay: 0.3s; }
+        .heart-icon:nth-child(3) { animation-delay: 0.6s; }
 
-@keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-}
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
 
-/* Запасной фон если видео не загрузится */
-.final-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, 
-        rgba(128, 207, 255, 0.2), 
-        rgba(193, 162, 232, 0.2),
-        rgba(255, 228, 232, 0.3));
-    z-index: 0;
-    opacity: 0;
-    transition: opacity 1s ease;
-}
+        /* Запасной фон если видео не загрузится */
+        .final-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(128, 207, 255, 0.2), 
+                rgba(193, 162, 232, 0.2),
+                rgba(255, 228, 232, 0.3));
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
 
-.video-error .final-section::before {
-    opacity: 1;
-}
+        .video-error .final-section::before {
+            opacity: 1;
+        }
 
-/* Адаптивность */
-@media (max-width: 992px) {
-    .final-title {
-        font-size: 3.5rem;
-        margin-bottom: 40px;
-    }
-    
-    .final-signature {
-        font-size: 2.5rem;
-        margin: 50px 0 30px;
-        padding: 15px 30px;
-    }
-    
-    .final-date {
-        font-size: 2.2rem;
-        letter-spacing: 6px;
-        padding: 20px 40px;
-    }
-    
-    .hearts-decoration {
-        margin: 40px 0;
-    }
-}
-
-@media (max-width: 768px) {
-    .final-title {
-        font-size: 2.8rem;
-        margin-bottom: 30px;
-        letter-spacing: 1px;
-    }
-    
-    .final-signature {
-        font-size: 2rem;
-        margin: 40px 0 25px;
-        padding: 10px 20px;
-    }
-    
-    .final-date {
-        font-size: 1.8rem;
-        letter-spacing: 4px;
-        padding: 15px 30px;
-    }
-    
-    .heart-icon {
-        font-size: 1.5rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .final-content {
-        padding: 20px;
-    }
-    
-    .final-title {
-        font-size: 2.2rem;
-        line-height: 1.3;
-    }
-    
-    .final-signature {
-        font-size: 1.6rem;
-        padding: 8px 15px;
-    }
-    
-    .final-date {
-        font-size: 1.4rem;
-        letter-spacing: 3px;
-        padding: 12px 20px;
-    }
-    
-    .hearts-decoration {
-        gap: 15px;
-    }
-}        /* ===== КНОПКА МУЗЫКИ ===== */
+        /* ===== КНОПКА МУЗЫКИ ===== */
         .music-btn {
             position: fixed;
             bottom: 30px;
@@ -1563,12 +1492,25 @@
                 left: 30px;
             }
             
-            .final-message h2 {
-                font-size: 3.2rem;
+            .final-title {
+                font-size: 3.5rem;
+                margin-bottom: 40px;
             }
             
-            .signature, .final-date {
+            .final-signature {
                 font-size: 2.5rem;
+                margin: 50px 0 30px;
+                padding: 15px 30px;
+            }
+            
+            .final-date {
+                font-size: 2.2rem;
+                letter-spacing: 6px;
+                padding: 20px 40px;
+            }
+            
+            .hearts-decoration {
+                margin: 40px 0;
             }
         }
 
@@ -1631,12 +1573,26 @@
                 margin: 0 20px;
             }
             
-            .final-message h2 {
+            .final-title {
                 font-size: 2.8rem;
+                margin-bottom: 30px;
+                letter-spacing: 1px;
             }
             
-            .signature, .final-date {
+            .final-signature {
                 font-size: 2rem;
+                margin: 40px 0 25px;
+                padding: 10px 20px;
+            }
+            
+            .final-date {
+                font-size: 1.8rem;
+                letter-spacing: 4px;
+                padding: 15px 30px;
+            }
+            
+            .heart-icon {
+                font-size: 1.5rem;
             }
         }
 
@@ -1664,12 +1620,28 @@
                 font-size: 1.8rem;
             }
             
-            .final-message h2 {
-                font-size: 2.5rem;
+            .final-content {
+                padding: 20px;
             }
             
-            .signature, .final-date {
-                font-size: 1.8rem;
+            .final-title {
+                font-size: 2.2rem;
+                line-height: 1.3;
+            }
+            
+            .final-signature {
+                font-size: 1.6rem;
+                padding: 8px 15px;
+            }
+            
+            .final-date {
+                font-size: 1.4rem;
+                letter-spacing: 3px;
+                padding: 12px 20px;
+            }
+            
+            .hearts-decoration {
+                gap: 15px;
             }
         }
     </style>
@@ -1772,37 +1744,37 @@
     </section>
 
     <!-- Мы + любовь -->
-   <section class="childhood-section" id="childhood">
-    <div class="container">
-        <div class="childhood-content">
-            <div class="child-photo">
-                <div class="photo-frame">
-                    <div class="photo-inner" style="background-image: url('assets/images/child-bride.jpg');"></div>
+    <section class="childhood-section" id="childhood">
+        <div class="container">
+            <div class="childhood-content">
+                <div class="child-photo">
+                    <div class="photo-frame">
+                        <div class="photo-inner" id="photo-kristalina"></div>
+                    </div>
+                    <h3>Кристалина</h3>
+                    <p>Всегда мечтала о настоящей любви</p>
                 </div>
-                <h3>Кристалина</h3>
-                <p>Всегда мечтала о настоящей любви</p>
-            </div>
 
-            <div class="child-photo">
-                <div class="photo-frame">
-                    <div class="photo-inner" style="background-image: url('assets/images/child-groom.jpg');"></div>
+                <div class="heart-animation">
+                    <div class="love-equation">
+                        <span>Кристалина</span>
+                        <span class="plus">+</span>
+                        <span>Александр</span>
+                        <span class="equals">=</span>
+                        <span class="heart-pulse">❤️</span>
+                    </div>
                 </div>
-                <h3>Александр</h3>
-                <p>Нашел свою половинку</p>
-            </div>
 
-            <div class="heart-animation">
-                <div class="love-equation">
-                    <span>Кристалина</span>
-                    <span class="plus">+</span>
-                    <span>Александр</span>
-                    <span class="equals">=</span>
-                    <span class="heart-pulse">❤️</span>
+                <div class="child-photo">
+                    <div class="photo-frame">
+                        <div class="photo-inner" id="photo-alexander"></div>
+                    </div>
+                    <h3>Александр</h3>
+                    <p>Нашел свою половинку</p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- Дата и место -->
     <section class="details-section" id="details">
@@ -1996,12 +1968,31 @@
         </div>
     </section>
 
-    <!-- Финальный блок -->
+    <!-- Финальный блок с видео -->
     <section class="final-section" id="final">
+        <!-- Видео на фоне -->
+        <div class="video-background">
+            <video autoplay muted loop playsinline>
+                <source src="assets/images/video/wedding-video.webm.mp4" type="video/mp4">
+            </video>
+        </div>
+        
+        <!-- Затемнение для читаемости текста -->
+        <div class="video-overlay"></div>
+        
+        <!-- Контент поверх видео -->
         <div class="container">
-            <div class="final-message">
-                <h2>Ждем вас на нашем празднике!</h2>
-                <p class="signature">С любовью,<br>Кристалина и Александр</p>
+            <div class="final-content">
+                <h2 class="final-title">Ждём вас на нашем празднике</h2>
+                
+                <div class="hearts-decoration">
+                    <i class="fas fa-heart heart-icon"></i>
+                    <i class="fas fa-heart heart-icon"></i>
+                    <i class="fas fa-heart heart-icon"></i>
+                </div>
+                
+                <p class="final-signature">С любовью,<br>Кристалина и Александр</p>
+                
                 <div class="final-date">8 февраля 2026</div>
             </div>
         </div>
@@ -2016,7 +2007,7 @@
     <script>
         // ===== ЗАГРУЗКА САЙТА =====
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Свадебный сайт загружен');
+            console.log('Свадебный сайт Кристалины и Александра загружается...');
             
             // Скрыть лоадер
             setTimeout(function() {
@@ -2025,17 +2016,18 @@
                     loading.style.opacity = '0';
                     setTimeout(() => {
                         loading.style.display = 'none';
-                        console.log('Сайт готов!');
+                        console.log('✅ Сайт полностью загружен!');
+                        
+                        // Инициализация всех функций после загрузки
+                        loadLocalPhotos();  // Загружаем фото
                         initAnimations();
-                        loadLocalPhotos(); // Загружаем ваши фото
+                        initCountdown();
+                        initRSVPForm();
+                        initMusicPlayer();
+                        initVideoBackground(); // Инициализируем видео
                     }, 500);
                 }
             }, 1000);
-            
-            // Инициализация функций
-            initCountdown();
-            initRSVPForm();
-            initMusicPlayer();
             
             // Плавный скролл
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -2055,41 +2047,50 @@
             });
         });
 
-        // ===== ЗАГРУЗКА ВАШИХ ФОТО =====
+        // ===== ЗАГРУЗКА ФОТО =====
         function loadLocalPhotos() {
-            console.log('📸 Загрузка ваших фотографий...');
+            console.log('📸 Загрузка фотографий...');
             
-            // Массив ваших фото
+            // Массив ваших фото - ИСПРАВЛЕННЫЕ ПУТИ
             const photos = [
                 {
                     id: 'photo-kristalina',
-                    url: 'assets/images/child-kristalina.jpg',
+                    url: 'assets/images/child-bride.jpg',      // Правильный путь к фото Кристалины
                     fallback: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80'
                 },
                 {
                     id: 'photo-alexander',
-                    url: 'assets/images/child-alexander.jpg',
+                    url: 'assets/images/child-groom.jpg',      // Правильный путь к фото Александра
                     fallback: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80'
                 }
             ];
             
             // Загружаем каждое фото
             photos.forEach(photo => {
+                const element = document.getElementById(photo.id);
+                if (!element) {
+                    console.log(`❌ Элемент не найден: ${photo.id}`);
+                    return;
+                }
+                
                 const img = new Image();
                 img.onload = function() {
-                    console.log(`✅ Ваше фото загружено: ${photo.url}`);
-                    const element = document.getElementById(photo.id);
-                    if (element) {
-                        element.style.backgroundImage = `url('${photo.url}')`;
-                    }
+                    console.log(`✅ Фото загружено: ${photo.url}`);
+                    element.style.backgroundImage = `url('${photo.url}')`;
+                    element.style.backgroundSize = 'cover';
+                    element.style.backgroundPosition = 'center';
                 };
                 img.onerror = function() {
-                    console.log(`❌ Фото не найдено: ${photo.url}`);
-                    const element = document.getElementById(photo.id);
-                    if (element) {
-                        element.style.backgroundImage = `url('${photo.fallback}')`;
-                        console.log(`🖼️ Использована заглушка для: ${photo.id}`);
-                    }
+                    console.log(`❌ Ошибка загрузки фото: ${photo.url}`);
+                    console.log('💡 Проверьте:');
+                    console.log(`  1. Файл существует: ${photo.url}`);
+                    console.log(`  2. Имя файла: ${photo.url.split('/').pop()}`);
+                    
+                    // Используем заглушку
+                    element.style.backgroundImage = `url('${photo.fallback}')`;
+                    element.style.backgroundSize = 'cover';
+                    element.style.backgroundPosition = 'center';
+                    console.log(`🖼️ Использована заглушка для: ${photo.id}`);
                 };
                 img.src = photo.url;
             });
@@ -2107,9 +2108,55 @@
                 };
                 img.onerror = function() {
                     console.log(`❌ Фоновое фото не найдено: ${path}`);
-                    console.log('⚠️ Проверьте наличие файлов в папке assets/images/');
                 };
                 img.src = path;
+            });
+        }
+
+        // ===== УПРАВЛЕНИЕ ВИДЕО =====
+        function initVideoBackground() {
+            console.log('🎬 Инициализация видео фона...');
+            
+            const video = document.querySelector('.video-background video');
+            if (!video) {
+                console.log('❌ Видео элемент не найден');
+                return;
+            }
+            
+            const videoPath = 'assets/images/video/wedding-video.webm.mp4';
+            
+            // Проверяем доступность видео
+            const testVideo = document.createElement('video');
+            testVideo.oncanplay = function() {
+                console.log(`✅ Видео доступно: ${videoPath}`);
+                video.play().then(() => {
+                    console.log('✅ Видео запущено');
+                }).catch(error => {
+                    console.log('⚠️ Автовоспроизведение заблокировано:', error.message);
+                });
+            };
+            testVideo.onerror = function() {
+                console.log(`❌ Видео не найдено: ${videoPath}`);
+                console.log('💡 Проверьте путь к видео файлу');
+                document.querySelector('.final-section').classList.add('video-error');
+            };
+            testVideo.src = videoPath;
+            
+            // Настройки видео
+            video.muted = true;
+            video.playsInline = true;
+            video.loop = true;
+            
+            // Зацикливание видео
+            video.addEventListener('ended', function() {
+                this.currentTime = 0;
+                this.play();
+            });
+            
+            // Успешная загрузка видео
+            video.addEventListener('loadeddata', function() {
+                console.log('✅ Видео загружено');
+                this.style.opacity = '1';
             });
         }
 
@@ -2125,128 +2172,9 @@
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
                         
-                        // Для текста в карточке приглашения
                         if (entry.target.classList.contains('welcome-card')) {
                             const paragraphs = entry.target.querySelectorAll('.welcome-text p');
                             paragraphs.forEach((p, index) => {
                                 setTimeout(() => {
                                     p.classList.add('visible');
-                                }, index * 300);
-                            });
-                        }
-                    }
-                });
-            }, observerOptions);
-
-            // Наблюдаемые элементы
-            const animatedElements = document.querySelectorAll(
-                '.welcome-card, .section-header h2, .story-item, .child-photo, ' +
-                '.heart-animation, .detail-card, .program-item, .countdown-item, ' +
-                '.rsvp-form, .chat-card, .final-message'
-            );
-
-            animatedElements.forEach(el => observer.observe(el));
-        }
-
-        // ===== ТАЙМЕР =====
-        function initCountdown() {
-            const weddingDate = new Date('2026-02-08T18:00:00').getTime();
-            
-            function updateCountdown() {
-                const now = new Date().getTime();
-                const timeLeft = weddingDate - now;
-                
-                if (timeLeft < 0) {
-                    document.getElementById('days').textContent = '000';
-                    document.getElementById('hours').textContent = '00';
-                    document.getElementById('minutes').textContent = '00';
-                    document.getElementById('seconds').textContent = '00';
-                    return;
-                }
-                
-                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                
-                // Обновление с анимацией
-                animateNumber('days', days, 3);
-                animateNumber('hours', hours, 2);
-                animateNumber('minutes', minutes, 2);
-                animateNumber('seconds', seconds, 2);
-            }
-            
-            function animateNumber(elementId, value, digits) {
-                const element = document.getElementById(elementId);
-                if (!element) return;
-                
-                const currentValue = parseInt(element.textContent) || 0;
-                
-                if (currentValue !== value) {
-                    element.style.transform = 'scale(1.1)';
-                    element.style.opacity = '0.7';
-                    
-                    setTimeout(() => {
-                        element.textContent = value.toString().padStart(digits, '0');
-                        element.style.transform = 'scale(1)';
-                        element.style.opacity = '1';
-                    }, 150);
-                }
-            }
-            
-            // Запуск таймера
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
-        }
-
-        // ===== АНКЕТА ГОСТЯ =====
-        function initRSVPForm() {
-            const form = document.getElementById('rsvp-form');
-            const attendanceRadios = document.querySelectorAll('input[name="attendance"]');
-            const partnerField = document.getElementById('partner-field');
-            
-            // Показать поле для спутников
-            attendanceRadios.forEach(radio => {
-                radio.addEventListener('change', function() {
-                    if (this.value === 'with_partner' && partnerField) {
-                        partnerField.style.display = 'block';
-                    } else if (partnerField) {
-                        partnerField.style.display = 'none';
-                    }
-                });
-            });
-            
-            // Отправка формы
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('🎉 Спасибо! Ваша анкета отправлена. Мы будем ждать вас на нашей свадьбе! ❤️');
-                form.reset();
-                if (partnerField) partnerField.style.display = 'none';
-            });
-        }
-
-        // ===== МУЗЫКА =====
-        function initMusicPlayer() {
-            const musicBtn = document.getElementById('music-toggle');
-            const musicIcon = musicBtn.querySelector('i');
-            
-            musicBtn.addEventListener('click', function() {
-                if (musicIcon.classList.contains('fa-volume-mute')) {
-                    musicIcon.classList.remove('fa-volume-mute');
-                    musicIcon.classList.add('fa-volume-up');
-                    alert('🎵 Музыка включена!');
-                } else {
-                    musicIcon.classList.remove('fa-volume-up');
-                    musicIcon.classList.add('fa-volume-mute');
-                    alert('🔇 Музыка выключена');
-                }
-            });
-        }
-
-        // ===== ЧАТ ГОСТЕЙ =====
-        document.querySelector('.chat-btn').addEventListener('click', function() {
-            alert('Чат гостей будет доступен ближе к дате свадьбы. Следите за обновлениями! 💌');
-        });
-    </script>
-</body>
-</html>
+                               
