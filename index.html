@@ -2323,7 +2323,8 @@
     }
   
  </script>
-    <style>
+
+<style>
 /* САМЫЕ ВАЖНЫЕ ФИКСЫ ДЛЯ ТЕЛЕФОНА */
 @media (max-width: 768px) {
     html, body {
@@ -2334,16 +2335,54 @@
     
     .container {
         padding: 0 15px !important;
+        overflow-x: hidden !important;
     }
     
     .couple-names {
         font-size: 2.5rem !important;
         padding: 0 10px !important;
         word-break: keep-all !important;
+        max-width: 100vw !important;
     }
     
     .welcome-card {
         margin: 0 10px !important;
+        max-width: calc(100vw - 20px) !important;
+    }
+    
+    /* ← ВОТ ЭТО САМОЕ ВАЖНОЕ! */
+    .details-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+    }
+    
+    .detail-card {
+        width: 100% !important;
+        margin: 0 !important;
+    }
+    
+    /* Для истории на телефоне */
+    .story-item {
+        flex-direction: column !important;
+        margin-bottom: 100px !important;
+    }
+    
+    .story-content {
+        width: 100% !important;
+        margin: 100px 0 0 0 !important;
+    }
+    
+    /* Для блока "Кристалина + Александр" */
+    .childhood-content {
+        flex-direction: column !important;
+        gap: 30px !important;
+    }
+    
+    .photo-frame {
+        width: 250px !important;
+        height: 250px !important;
+        margin: 0 auto 20px !important;
     }
 }
 </style>
