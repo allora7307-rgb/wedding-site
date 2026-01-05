@@ -2333,13 +2333,15 @@
         display: none !important; 
     }
     
-    /* ЯРЧЕ ФОТО */
+    /* ЯРЧЕ ФОТО + ИСПРАВЛЕНИЕ ДЛЯ iOS */
     body::before { 
-        filter: brightness(1) !important; 
-        background-attachment: scroll !important; /* Отключить параллакс на телефоне */
+        filter: brightness(1.1) !important; /* Чуть ярче чем на компьютере */
+        background-position: center top !important; /* Лучше для вертикальных экранов */
+        -webkit-backface-visibility: hidden;
+        -webkit-transform: translateZ(0);
     }
     
-    /* УБРАТЬ БЕЛЫЙ ФОН В СЕКЦИЯХ */
+    /* ПРОЗРАЧНЕЕ ФОН СЕКЦИЙ */
     .welcome-section::before,
     .story-section::before,
     .details-section::before,
@@ -2347,16 +2349,20 @@
     .rsvp-section::before,
     .chat-section::before,
     .childhood-section::before {
-        background: rgba(245, 245, 245, 0.6) !important; /* Более прозрачный */
-        backdrop-filter: blur(2px) !important;
+        background: rgba(245, 245, 245, 0.5) !important; /* Ещё прозрачнее */
+        backdrop-filter: blur(1px) !important;
+    }
+    
+    /* ПРОЗРАЧНЫЕ КАРТОЧКИ */
+    .welcome-card,
+    .detail-card,
+    .story-content,
+    .chat-card,
+    .rsvp-form {
+        background: rgba(255, 255, 255, 0.9) !important;
     }
     
     html, body {
-        overflow-x: hidden !important;
-        width: 100% !important;
-        max-width: 100vw !important;
-    }
-        html, body {
         overflow-x: hidden !important;
         width: 100% !important;
         max-width: 100vw !important;
@@ -2377,9 +2383,44 @@
     .welcome-card {
         margin: 0 10px !important;
         max-width: calc(100vw - 20px) !important;
+        background: rgba(255, 255, 255, 0.92) !important; /* Белее карточка */
     }
     
-    /* ← ВОТ ЭТО САМОЕ ВАЖНОЕ! */
+    .details-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+    }
+    
+    .detail-card {
+        width: 100% !important;
+        margin: 0 !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+    }
+    
+    .story-item {
+        flex-direction: column !important;
+        margin-bottom: 100px !important;
+    }
+    
+    .story-content {
+        width: 100% !important;
+        margin: 100px 0 0 0 !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+    }
+    
+    .childhood-content {
+        flex-direction: column !important;
+        gap: 30px !important;
+    }
+    
+    .photo-frame {
+        width: 250px !important;
+        height: 250px !important;
+        margin: 0 auto 20px !important;
+    }
+}
+</style>    /* ← ВОТ ЭТО САМОЕ ВАЖНОЕ! */
     .details-grid {
         display: flex !important;
         flex-direction: column !important;
