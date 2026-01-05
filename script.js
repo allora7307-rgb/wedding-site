@@ -780,3 +780,23 @@ window.WeddingSite = {
 };
 
 console.log('🎉 Свадебный скрипт инициализирован!');
+);
+document.addEventListener('DOMContentLoaded', function() {
+    // Ждем 2 секунды после загрузки
+    setTimeout(function() {
+        console.log("🔄 Принудительная установка фото...");
+        
+        const kristalina = document.getElementById('photo-kristalina');
+        const alexander = document.getElementById('photo-alexander');
+        
+        if (kristalina) {
+            kristalina.style.backgroundImage = "url('/assets/images/child-bride.jpg')";
+            console.log("✅ Фото Кристалины установлено принудительно");
+        }
+        
+        if (alexander) {
+            alexander.style.backgroundImage = "url('/assets/images/child-groom.jpg')";
+            console.log("✅ Фото Александра установлено принудительно");
+        }
+    }, 2000);
+});
