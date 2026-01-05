@@ -194,20 +194,11 @@ body {
     background-size: cover;
     background-position: center;
     border: 6px solid white;
-    background-color: #f0f0f0; /* Фон по умолчанию */
+    background-color: #f0f0f0;
 }
 
-/* ВАЖНО: УБЕРИТЕ ЭТИ СТРОКИ ИЛИ ЗАКОММЕНТИРУЙТЕ ИХ! */
-/* Они переопределяют то, что делает JavaScript */
-/*
-#photo-kristalina {
-    background-image: url('/assets/images/child-kristalina.jpg');
-}
-
-#photo-alexander {
-    background-image: url('/assets/images/child-alexander.jpg');
-}
-*/
+/* УБРАЛИ ВСЕ ССЫЛКИ НА ФОТО ЗДЕСЬ! */
+/* JavaScript будет устанавливать фото */
 
 .child-photo h3 {
     font-family: 'Cormorant Garamond', serif;
@@ -223,7 +214,7 @@ body {
     animation: heartbeat 2s infinite;
 }
 
-/* ===== ФИНАЛЬНЫЙ БЛОК (ИСПРАВЛЕН) ===== */
+/* ===== ФИНАЛЬНЫЙ БЛОК ===== */
 .final-section {
     padding: 120px 0;
     background: linear-gradient(135deg, #9C27B0, #673AB7);
