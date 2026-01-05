@@ -2007,177 +2007,311 @@
     </button>
 
     <!-- JavaScript -->
-    <script>
-        // ===== ЗАГРУЗКА САЙТА =====
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Свадебный сайт Кристалины и Александра загружается...');
-            
-            // Скрыть лоадер
-            setTimeout(function() {
-                const loading = document.getElementById('loading');
-                if (loading) {
-                    loading.style.opacity = '0';
-                    setTimeout(() => {
-                        loading.style.display = 'none';
-                        console.log('✅ Сайт полностью загружен!');
-                        
-                        // Инициализация всех функций после загрузки
-                        loadLocalPhotos();  // Загружаем фото
-                        initAnimations();
-                        initCountdown();
-                        initRSVPForm();
-                        initMusicPlayer();
-                        initVideoBackground(); // Инициализируем видео
-                    }, 500);
-                }
-            }, 1000);
-            
-            // Плавный скролл
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
+ <script>
+    // ===== ЗАГРУЗКА САЙТА =====
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Свадебный сайт Кристалины и Александра загружается...');
+        
+        // Скрыть лоадер
+        setTimeout(function() {
+            const loading = document.getElementById('loading');
+            if (loading) {
+                loading.style.opacity = '0';
+                setTimeout(() => {
+                    loading.style.display = 'none';
+                    console.log('✅ Сайт полностью загружен!');
                     
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
+                    // Инициализация всех функций после загрузки
+                    loadLocalPhotos();  // Загружаем фото
+                    initAnimations();
+                    initCountdown();
+                    initRSVPForm();
+                    initMusicPlayer();
+                    initVideoBackground();
+                }, 500);
+            }
+        }, 1000);
+        
+        // Плавный скролл
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
+    });
 
-        // ===== ЗАГРУЗКА ФОТО =====
-        function loadLocalPhotos() {
-            console.log('📸 Загрузка фотографий...');
-            
-            // Массив ваших фото - ИСПРАВЛЕННЫЕ ПУТИ
-            const photos = [
-                {
-                    id: 'photo-kristalina',
-                    url: 'assets/images/child-bride.jpg',      // Правильный путь к фото Кристалины
-                    fallback: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80'
-                },
-                {
-                    id: 'photo-alexander',
-                    url: 'assets/images/child-groom.jpg',      // Правильный путь к фото Александра
-                    fallback: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80'
-                }
-            ];
-            
-            // Загружаем каждое фото
-            photos.forEach(photo => {
-                const element = document.getElementById(photo.id);
-                if (!element) {
-                    console.log(`❌ Элемент не найден: ${photo.id}`);
-                    return;
-                }
-                
-                const img = new Image();
-                img.onload = function() {
-                    console.log(`✅ Фото загружено: ${photo.url}`);
-                    element.style.backgroundImage = `url('${photo.url}')`;
-                    element.style.backgroundSize = 'cover';
-                    element.style.backgroundPosition = 'center';
-                };
-                img.onerror = function() {
-                    console.log(`❌ Ошибка загрузки фото: ${photo.url}`);
-                    console.log('💡 Проверьте:');
-                    console.log(`  1. Файл существует: ${photo.url}`);
-                    console.log(`  2. Имя файла: ${photo.url.split('/').pop()}`);
-                    
-                    // Используем заглушку
-                    element.style.backgroundImage = `url('${photo.fallback}')`;
-                    element.style.backgroundSize = 'cover';
-                    element.style.backgroundPosition = 'center';
-                    console.log(`🖼️ Использована заглушка для: ${photo.id}`);
-                };
-                img.src = photo.url;
-            });
-            
-            // Проверяем фоновые фото
-            const bgPhotos = [
-                'assets/images/proposal-bg.jpg',
-                'assets/images/nvitation-bg.jpg'
-            ];
-            
-            bgPhotos.forEach(path => {
-                const img = new Image();
-                img.onload = function() {
-                    console.log(`✅ Фоновое фото загружено: ${path}`);
-                };
-                img.onerror = function() {
-                    console.log(`❌ Фоновое фото не найдено: ${path}`);
-                };
-                img.src = path;
-            });
-        }
-
-        // ===== УПРАВЛЕНИЕ ВИДЕО =====
-        function initVideoBackground() {
-            console.log('🎬 Инициализация видео фона...');
-            
-            const video = document.querySelector('.video-background video');
-            if (!video) {
-                console.log('❌ Видео элемент не найден');
+    // ===== ЗАГРУЗКА ФОТО =====
+    function loadLocalPhotos() {
+        console.log('📸 Загрузка фотографий...');
+        
+        // Массив ваших фото
+        const photos = [
+            {
+                id: 'photo-kristalina',
+                url: 'assets/images/child-bride.jpg',
+                fallback: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80'
+            },
+            {
+                id: 'photo-alexander',
+                url: 'assets/images/child-groom.jpg',
+                fallback: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80'
+            }
+        ];
+        
+        // Загружаем каждое фото
+        photos.forEach(photo => {
+            const element = document.getElementById(photo.id);
+            if (!element) {
+                console.log(`❌ Элемент не найден: ${photo.id}`);
                 return;
             }
             
-            const videoPath = 'assets/images/video/wedding-video.webm.mp4';
-            
-            // Проверяем доступность видео
-            const testVideo = document.createElement('video');
-            testVideo.oncanplay = function() {
-                console.log(`✅ Видео доступно: ${videoPath}`);
-                video.play().then(() => {
-                    console.log('✅ Видео запущено');
-                }).catch(error => {
-                    console.log('⚠️ Автовоспроизведение заблокировано:', error.message);
-                });
+            const img = new Image();
+            img.onload = function() {
+                console.log(`✅ Фото загружено: ${photo.url}`);
+                element.style.backgroundImage = `url('${photo.url}')`;
+                element.style.backgroundSize = 'cover';
+                element.style.backgroundPosition = 'center';
             };
-            testVideo.onerror = function() {
-                console.log(`❌ Видео не найдено: ${videoPath}`);
-                console.log('💡 Проверьте путь к видео файлу');
-                document.querySelector('.final-section').classList.add('video-error');
+            img.onerror = function() {
+                console.log(`❌ Ошибка загрузки фото: ${photo.url}`);
+                element.style.backgroundImage = `url('${photo.fallback}')`;
+                element.style.backgroundSize = 'cover';
+                element.style.backgroundPosition = 'center';
+                console.log(`🖼️ Использована заглушка для: ${photo.id}`);
             };
-            testVideo.src = videoPath;
-            
-            // Настройки видео
-            video.muted = true;
-            video.playsInline = true;
-            video.loop = true;
-            
-            // Зацикливание видео
-            video.addEventListener('ended', function() {
-                this.currentTime = 0;
-                this.play();
+            img.src = photo.url;
+        });
+        
+        // Проверяем фоновые фото
+        const bgPhotos = [
+            'assets/images/proposal-bg.jpg',
+            'assets/images/nvitation-bg.jpg'
+        ];
+        
+        bgPhotos.forEach(path => {
+            const img = new Image();
+            img.onload = function() {
+                console.log(`✅ Фоновое фото загружено: ${path}`);
+            };
+            img.onerror = function() {
+                console.log(`❌ Фоновое фото не найдено: ${path}`);
+            };
+            img.src = path;
+        });
+    }
+
+    // ===== АНИМАЦИИ ПРИ СКРОЛЛЕ =====
+    function initAnimations() {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    if (entry.target.classList.contains('welcome-card')) {
+                        const paragraphs = entry.target.querySelectorAll('.welcome-text p');
+                        paragraphs.forEach((p, index) => {
+                            setTimeout(() => {
+                                p.classList.add('visible');
+                            }, index * 300);
+                        });
+                    }
+                }
             });
+        }, observerOptions);
+
+        // Наблюдаем за всеми элементами с анимацией
+        document.querySelectorAll('.welcome-card, .section-header h2, .story-item, .child-photo, .heart-animation, .detail-card, .program-item, .countdown-item, .rsvp-form, .chat-card, .final-content').forEach(el => {
+            observer.observe(el);
+        });
+    }
+
+    // ===== ТАЙМЕР ОБРАТНОГО ОТСЧЕТА =====
+    function initCountdown() {
+        const weddingDate = new Date('February 8, 2026 18:00:00').getTime();
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = weddingDate - now;
             
-            // Успешная загрузка видео
-            video.addEventListener('loadeddata', function() {
-                console.log('✅ Видео загружено');
-                this.style.opacity = '1';
-            });
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(3, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
         }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    }
 
-        // ===== АНИМАЦИИ ПРИ СКРОЛЛЕ =====
-        function initAnimations() {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
+    // ===== ФОРМА RSVP =====
+    function initRSVPForm() {
+        const form = document.getElementById('rsvp-form');
+        const attendanceRadios = document.querySelectorAll('input[name="attendance"]');
+        const partnerField = document.getElementById('partner-field');
+        
+        // Показать/скрыть поле для партнера
+        attendanceRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                partnerField.style.display = this.value === 'with_partner' ? 'block' : 'none';
+            });
+        });
+        
+        // Обработка отправки формы
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            console.log('📝 Данные формы:', data);
+            
+            alert('Спасибо! Ваш ответ сохранён. Мы ждём вас на свадьбе!');
+            form.reset();
+            partnerField.style.display = 'none';
+            
+            // Здесь можно добавить отправку на сервер
+            // fetch('/save-rsvp', { method: 'POST', body: JSON.stringify(data) })
+        });
+    }
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        
-                        if (entry.target.classList.contains('welcome-card')) {
-                            const paragraphs = entry.target.querySelectorAll('.welcome-text p');
-                            paragraphs.forEach((p, index) => {
-                                setTimeout(() => {
-                                    p.classList.add('visible');
-                               
+    // ===== ФОНОВАЯ МУЗЫКА =====
+    function initMusicPlayer() {
+        console.log('🎵 Инициализация музыкального плеера...');
+        
+        const musicToggle = document.getElementById('music-toggle');
+        const musicIcon = musicToggle.querySelector('i');
+        
+        // Создаем аудио элемент
+        const backgroundMusic = new Audio('assets/music/wedding-music.mp3');
+        backgroundMusic.loop = true;
+        backgroundMusic.volume = 0.4;
+        
+        let musicPlaying = false;
+        
+        // Функция для запуска музыки
+        function playMusic() {
+            backgroundMusic.play()
+                .then(() => {
+                    console.log('🎶 Фоновая музыка включена');
+                    musicPlaying = true;
+                    musicIcon.classList.remove('fa-volume-mute');
+                    musicIcon.classList.add('fa-volume-up');
+                })
+                .catch(error => {
+                    console.log('⚠️ Автовоспроизведение музыки заблокировано:', error.message);
+                    musicIcon.classList.remove('fa-volume-mute');
+                    musicIcon.classList.add('fa-volume-off');
+                    musicIcon.title = 'Нажмите чтобы включить музыку';
+                });
+        }
+        
+        // Пытаемся запустить музыку после загрузки страницы
+        setTimeout(playMusic, 1500);
+        
+        // Обработчик клика по кнопке музыки
+        musicToggle.addEventListener('click', function() {
+            if (musicPlaying) {
+                backgroundMusic.pause();
+                musicIcon.classList.remove('fa-volume-up');
+                musicIcon.classList.add('fa-volume-mute');
+                musicPlaying = false;
+                console.log('⏸️ Музыка приостановлена');
+            } else {
+                backgroundMusic.play()
+                    .then(() => {
+                        musicIcon.classList.remove('fa-volume-mute', 'fa-volume-off');
+                        musicIcon.classList.add('fa-volume-up');
+                        musicPlaying = true;
+                        console.log('▶️ Музыка включена');
+                    })
+                    .catch(error => {
+                        console.log('❌ Ошибка воспроизведения:', error);
+                        alert('Чтобы включить музыку, нажмите на любую часть страницы и затем на кнопку музыки');
+                    });
+            }
+        });
+        
+        // Обход ограничений автовоспроизведения
+        document.addEventListener('click', function firstInteraction() {
+            if (!musicPlaying) {
+                playMusic();
+            }
+            document.removeEventListener('click', firstInteraction);
+        });
+        
+        document.addEventListener('scroll', function firstScroll() {
+            if (!musicPlaying) {
+                playMusic();
+            }
+            document.removeEventListener('scroll', firstScroll);
+        }, { once: true });
+    }
+
+    // ===== УПРАВЛЕНИЕ ВИДЕО =====
+    function initVideoBackground() {
+        console.log('🎬 Инициализация видео фона...');
+        
+        const video = document.querySelector('.video-background video');
+        if (!video) {
+            console.log('❌ Видео элемент не найден');
+            return;
+        }
+        
+        const videoPath = 'assets/videos/wedding-video.mp4';
+        
+        // Проверяем доступность видео
+        const testVideo = document.createElement('video');
+        testVideo.oncanplay = function() {
+            console.log(`✅ Видео доступно: ${videoPath}`);
+            video.play().then(() => {
+                console.log('✅ Видео запущено');
+            }).catch(error => {
+                console.log('⚠️ Автовоспроизведение заблокировано:', error.message);
+            });
+        };
+        testVideo.onerror = function() {
+            console.log(`❌ Видео не найдено: ${videoPath}`);
+            console.log('💡 Проверьте путь к видео файлу');
+            document.querySelector('.final-section').classList.add('video-error');
+        };
+        testVideo.src = videoPath;
+        
+        // Настройки видео
+        video.muted = true;
+        video.playsInline = true;
+        video.loop = true;
+        
+        // Зацикливание видео
+        video.addEventListener('ended', function() {
+            this.currentTime = 0;
+            this.play();
+        });
+        
+        // Успешная загрузка видео
+        video.addEventListener('loadeddata', function() {
+            console.log('✅ Видео загружено');
+            this.style.opacity = '1';
+        });
+    }
+</script>
