@@ -2170,37 +2170,140 @@
         setInterval(updateCountdown, 1000);
     }
 
-    // ===== ФОРМА RSVP =====
-    function initRSVPForm() {
-        const form = document.getElementById('rsvp-form');
-        const attendanceRadios = document.querySelectorAll('input[name="attendance"]');
-        const partnerField = document.getElementById('partner-field');
-        
-        // Показать/скрыть поле для партнера
-        attendanceRadios.forEach(radio => {
-            radio.addEventListener('change', function() {
-                partnerField.style.display = this.value === 'with_partner' ? 'block' : 'none';
-            });
+    // ===== ОТПРАВКА ФОРМЫ В TELEGRAM =====
+async function sendToTelegram(formData) {
+    const BOT_TOKEN = '8594126154:AAG9CeYY1ns1mRVkiTybOsbyFw2D6Jyd5wY';
+    const CHAT_ID = '-1003670132413';
+    
+    let message = `📋 НОВАЯ ЗАЯВКА НА СВАДЬБУ!\n\n`;
+    message += `👤 Имя: ${formData.name} ${formData.surname}\n`;
+    
+    let attendanceText = '';
+    switch(formData.attendance) {
+        case 'alone':
+            attendanceText = '✅ Приду один(одна)';
+            break;
+        case 'with_partner':
+            attendanceText = `👥 Приду с парой/семьёй\n👥 Имена гостей: ${formData.partner_names || 'не указано'}`;
+            break;
+        case 'decline':
+            attendanceText = '❌ Не смогу прийти';
+            break;
+    }
+    message += `📅 Участие: ${attendanceText}\n`;
+    
+    if (formData.allergies) {
+        message += `⚠️ Аллергия: ${formData.allergies}\n`;
+    }
+    
+    if (formData.drinks) {
+        message += `🥂 Напитки: ${formData.drinks}\n`;
+    }
+    
+    if (formData.menu_wishes) {
+        message += `🍽️ Пожелания по меню: ${formData.menu_wishes}\n`;
+    }
+    
+    message += `\n📅 Дата отправки: ${new Date().toLocaleString('ru-RU')}`;
+    
+    try {
+        const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                chat_id: CHAT_ID,
+                text: message,
+                parse_mode: 'HTML'
+            })
         });
         
-        // Обработка отправки формы
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
+        const data = await response.json();
+        
+        if (data.ok) {
+            console.log('✅ Заявка отправлена в Telegram');
+            return true;
+        } else {
+            console.error('❌ Ошибка отправки в Telegram:', data);
+            return false;
+        }
+    } catch (error) {
+        console.error('❌ Ошибка сети:', error);
+        return false;
+    }
+}
+
+// ===== ОБНОВЛЕННАЯ ФУНКЦИЯ ОБРАБОТКИ ФОРМЫ =====
+function initRSVPForm() {
+    const form = document.getElementById('rsvp-form');
+    const attendanceRadios = document.querySelectorAll('input[name="attendance"]');
+    const partnerField = document.getElementById('partner-field');
+    
+    // Показать/скрыть поле для партнера (ЭТО ОСТАЁТСЯ!)
+    attendanceRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            partnerField.style.display = this.value === 'with_partner' ? 'block' : 'none';
+        });
+    });
+    
+    // Обработка отправки формы (ЭТО ПОЛНОСТЬЮ МЕНЯЕТСЯ!)
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitBtn = this.querySelector('.submit-btn');
+        const originalBtnText = submitBtn.innerHTML;
+        
+        try {
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
+            submitBtn.disabled = true;
             
             const formData = new FormData(this);
             const data = Object.fromEntries(formData);
             
             console.log('📝 Данные формы:', data);
             
-            alert('Спасибо! Ваш ответ сохранён. Мы ждём вас на свадьбе!');
-            form.reset();
-            partnerField.style.display = 'none';
+            const telegramSent = await sendToTelegram(data);
             
-            // Здесь можно добавить отправку на сервер
-            // fetch('/save-rsvp', { method: 'POST', body: JSON.stringify(data) })
-        });
-    }
-
+            if (telegramSent) {
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> Отправлено!';
+                submitBtn.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
+                
+                setTimeout(() => {
+                    alert('🎉 Спасибо! Ваш ответ сохранён и отправлен организаторам. Мы ждём вас на свадьбе!');
+                    
+                    // Сбрасываем форму (ЭТО ОСТАЁТСЯ!)
+                    form.reset();
+                    partnerField.style.display = 'none';
+                    
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalBtnText;
+                        submitBtn.style.background = '';
+                        submitBtn.disabled = false;
+                    }, 2000);
+                    
+                }, 500);
+                
+            } else {
+                throw new Error('Ошибка отправки в Telegram');
+            }
+            
+        } catch (error) {
+            console.error('❌ Ошибка:', error);
+            
+            submitBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Ошибка';
+            submitBtn.style.background = 'linear-gradient(135deg, #f44336, #d32f2f)';
+            
+            setTimeout(() => {
+                alert('⚠️ Произошла ошибка при отправке. Пожалуйста, попробуйте еще раз или свяжитесь с нами напрямую.');
+                
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.style.background = '';
+                submitBtn.disabled = false;
+            }, 2000);
+        }
+    });
+}
     // ===== ФОНОВАЯ МУЗЫКА =====
     function initMusicPlayer() {
         console.log('🎵 Инициализация музыкального плеера...');
