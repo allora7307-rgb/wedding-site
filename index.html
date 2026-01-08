@@ -782,7 +782,38 @@
             margin-bottom: 20px;
             display: block;
         }
+/* ===== АКТИВНАЯ КАРТА-ССЫЛКА 2ГИС ===== */
+.map-placeholder {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: block;
+    color: var(--primary-lilac);
+    padding: 30px;
+    background: rgba(128, 207, 255, 0.1);
+    border-radius: 20px;
+    border: 2px dashed var(--primary-lilac);
+    text-decoration: none;
+}
 
+.map-placeholder:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-blue);
+    border-style: solid;
+    box-shadow: 0 10px 25px rgba(128, 207, 255, 0.25);
+    background: rgba(128, 207, 255, 0.15);
+}
+
+.map-placeholder i.fa-map-marked-alt {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    display: block;
+    color: var(--primary-blue);
+}
+
+.map-placeholder i.fa-external-link-alt {
+    font-size: 0.8rem;
+    margin-right: 5px;
+}
         /* ===== ПРОГРАММА ===== */
         .program-section {
             padding: 120px 0;
