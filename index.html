@@ -1039,14 +1039,23 @@
             position: relative;
             z-index: 1;
         }
-
-        .program-item {
+.program-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 35px;
     background: linear-gradient(135deg, 
         rgba(255, 255, 255, 0.95) 0%,
         rgba(255, 255, 255, 0.88) 100%) !important;
     backdrop-filter: blur(8px);
+    border-radius: 25px;
+    padding: 30px;
+    box-shadow: 0 10px 20px rgba(128, 207, 255, 0.1);
+    transition: all 0.4s ease;
     border: 1px solid rgba(255, 255, 255, 0.3);
-}
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.8s ease-out;
+}     
         .program-item.visible {
             opacity: 1;
             transform: translateX(0);
