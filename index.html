@@ -710,12 +710,21 @@
     border-radius: 20px !important;
     font-weight: 500 !important;
 }
-    .detail-card {
+   .detail-card {
     background: linear-gradient(135deg, 
         rgba(255, 255, 255, 0.92) 0%,
         rgba(255, 255, 255, 0.85) 100%) !important;
     backdrop-filter: blur(12px);
+    border-radius: 25px;
+    padding: 50px 40px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.4);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
 }
         .detail-card.visible {
             opacity: 1;
