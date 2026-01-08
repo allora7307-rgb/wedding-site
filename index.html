@@ -459,12 +459,19 @@
             font-size: 1.2rem;
         }
 
-       .story-content {
+     .story-content {
+    flex: 1;
+    padding: 40px;
     background: linear-gradient(135deg, 
         rgba(255, 255, 255, 0.9) 0%,
         rgba(255, 255, 255, 0.8) 100%) !important;
     backdrop-filter: blur(10px);
+    border-radius: 25px;
+    box-shadow: 0 15px 30px rgba(128, 207, 255, 0.1);
+    margin: 0 20px;
+    position: relative;
     border: 1px solid rgba(255, 255, 255, 0.3);
+    width: calc(50% - 100px);
 }
         .story-item:nth-child(odd) .story-content {
             margin-left: calc(50% + 80px);
