@@ -647,15 +647,67 @@
         }
 
         .details-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important; /* Две равные колонки */
+    grid-template-rows: auto auto !important; /* Две строки */
+    gap: 30px !important;
+    max-width: 1000px !important;
+    margin: 0 auto !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
 
+/* Карточка с датой - занимает всю ширину во второй строке */
+.date-card {
+    grid-column: 1 / span 2 !important; /* Занимает обе колонки */
+    grid-row: 2 !important; /* Располагается во второй строке */
+    max-width: 500px !important; /* Уже по горизонтали */
+    margin: 0 auto !important;
+    padding: 40px 35px !important; /* Увеличиваем отступы по бокам */
+}
+
+/* Карточка загса - в первой строке, первая колонка */
+.church-card {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+}
+
+/* Карточка ресторана - в первой строке, вторая колонка */
+.location-card {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+}
+
+/* Сделаем карточку даты более горизонтальной */
+.date-display {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 25px !important;
+    margin: 20px 0 25px !important; /* Уменьшаем отступы сверху/снизу */
+}
+
+.date-number {
+    font-size: 4rem !important; /* Было 5.5rem, делаем меньше */
+    font-weight: 600;
+    color: var(--primary-blue);
+    line-height: 1;
+    font-family: 'Poppins', sans-serif;
+}
+
+.time-info {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 15px !important;
+    color: var(--dark-text) !important;
+    font-size: 1.2rem !important; /* Было 1.3rem */
+    margin-top: 15px !important; /* Было 25px */
+    padding: 15px !important; /* Было 20px */
+    background: rgba(128, 207, 255, 0.1) !important;
+    border-radius: 20px !important;
+    font-weight: 500 !important;
+}
         .detail-card {
             background: var(--pure-white);
             border-radius: 25px;
