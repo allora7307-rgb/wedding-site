@@ -1960,6 +1960,47 @@
         margin: 15px 0 20px !important;
         padding: 15px !important;
     }
+    /* АДАПТИВНОСТЬ ДЛЯ ПРОЗРАЧНЫХ КАРТОЧЕК НА МОБИЛЬНЫХ */
+@media (max-width: 992px) {
+    .story-content,
+    .detail-card,
+    .program-item {
+        backdrop-filter: blur(5px) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .story-content {
+        backdrop-filter: blur(3px) !important;
+        padding: 30px 25px !important;
+    }
+    
+    .detail-card {
+        backdrop-filter: blur(4px) !important;
+        padding: 40px 25px !important;
+    }
+    
+    .program-item {
+        backdrop-filter: blur(3px) !important;
+        padding: 25px 20px !important;
+    }
+    
+    .rsvp-form {
+        backdrop-filter: blur(5px) !important;
+        padding: 40px 25px !important;
+    }
+    
+    .chat-card {
+        backdrop-filter: blur(5px) !important;
+        padding: 40px 25px !important;
+    }
+    
+    .welcome-card {
+        background: rgba(255, 255, 255, 0.88) !important;
+        backdrop-filter: blur(8px) !important;
+        padding: 40px 25px !important;
+    }
+}
 }</style>
 </head>
 <body>
