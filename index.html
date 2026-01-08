@@ -2001,6 +2001,76 @@
         padding: 40px 25px !important;
     }
 }
+/* ПРОСТОЙ ФИКС ДЛЯ ПРОЗРАЧНЫХ КАРТОЧЕК */
+body::after {
+    background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.welcome-card,
+.story-content,
+.detail-card,
+.program-item,
+.rsvp-form,
+.chat-card,
+.love-equation {
+    opacity: 0.95 !important;
+    backdrop-filter: blur(15px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(15px) saturate(180%) !important;
+    background: rgba(255, 255, 255, 0.75) !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Особо прозрачная карточка приветствия */
+.welcome-card {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(20px) !important;
+}
+
+/* Еще прозрачнее карточка уравнения любви */
+.love-equation {
+    background: rgba(255, 255, 255, 0.65) !important;
+    backdrop-filter: blur(12px) !important;
+}
+
+/* Прозрачность для фото оверлея в загсе */
+.photo-overlay {
+    background: rgba(0, 0, 0, 0.25) !important;
+    backdrop-filter: blur(4px) !important;
+}
+
+/* Улучшение читаемости текста на прозрачном фоне */
+.story-content h3,
+.detail-card h3,
+.program-content h3,
+.chat-card h2,
+.welcome-card h2,
+.rsvp-form h2,
+.location-info h4 {
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    .welcome-card,
+    .story-content,
+    .detail-card,
+    .program-item,
+    .rsvp-form,
+    .chat-card,
+    .love-equation {
+        backdrop-filter: blur(8px) !important;
+        -webkit-backdrop-filter: blur(8px) !important;
+        background: rgba(255, 255, 255, 0.85) !important;
+    }
+    
+    body::after {
+        background: rgba(255, 255, 255, 0.08) !important;
+    }
+}
+
+/* ===== КОНЕЦ ФИКСА ===== */
+
 }</style>
 </head>
 <body>
