@@ -1893,8 +1893,63 @@
         font-size: 0.95rem;
     }
 }
+/* АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ */
+@media (max-width: 992px) {
+    .details-grid {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto auto auto !important;
+        gap: 25px !important;
+    }
+    
+    .church-card,
+    .location-card,
+    .date-card {
+        grid-column: 1 !important;
+    }
+    
+    .church-card {
+        grid-row: 1 !important;
+    }
+    
+    .location-card {
+        grid-row: 2 !important;
+    }
+    
+    .date-card {
+        grid-row: 3 !important;
+        max-width: 100% !important;
+        padding: 35px 25px !important;
+    }
+    
+    .date-display {
+        flex-direction: column !important;
+        gap: 15px !important;
+    }
+    
+    .date-number {
+        font-size: 4.5rem !important;
+    }
+}
 
-</style>
+@media (max-width: 768px) {
+    .church-photo {
+        height: 200px !important;
+        margin: 15px 0 20px !important;
+    }
+    
+    .photo-overlay {
+        padding: 12px 10px !important;
+    }
+    
+    .ceremony-time {
+        font-size: 1.5rem !important;
+    }
+    
+    .ceremony-details {
+        margin: 15px 0 20px !important;
+        padding: 15px !important;
+    }
+}</style>
 </head>
 <body>
     <!-- Загрузочный экран -->
